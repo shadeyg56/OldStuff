@@ -1,0 +1,18 @@
++ 26/06/2017
+- Created robotics.log
+- Used sketchup for components
+- Stopped using sketchup due to better alternative
+- Found Lego Digital Designer
+- Brainstormed ideas for rover
+
++ 27/06/2017
+- Installed Lego Digital Designer
+- Tested out Robots
+- Learned Basic Syntax of NXT
+- Learned about Sensor Components
+- Started using Discord to communicate
+- Made a logging command for the robotics log
+
++ 28/06/2017
+- Made pulley robot that pulled object 25cm
+- Problems with the robot were: Bad Design (Too high), Wrong Function (Should be Rotate Motor), Bad setup (String was not straight)
