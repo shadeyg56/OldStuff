@@ -24,8 +24,9 @@ After that the bot will launch without setup neccessary.
 ## Commands
 
 The default set of modules includes:
-* Moderation features (kick/ban/softban/mute, mod-log, chat cleanup)
-* Fun misc commands.
-* Utility commands such as logs and tags
+* Moderation features
+* Fun misc commands
 * Complex Embed commands
-* Custom commands
+* Text tagging system
+* Work logging system
+* Tournament submission system
