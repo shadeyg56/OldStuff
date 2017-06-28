@@ -36,4 +36,5 @@ It would be greatly appreciated if you can support me by joining my discord serv
 ### Credits
 
 > Credits to Ace for making the amazing KnightBot logo.
+
 > Credits to the moderation team of our server for keeping it smooth.
