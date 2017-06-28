@@ -32,3 +32,8 @@ The default set of modules includes:
 ## Support Me
 
 It would be greatly appreciated if you can support me by joining my discord server and socialising with me! Join it to stay up to date on updates and announcements. Stay for a good time! Join here: https://discord.io/kbot
+
+### Credits
+
+> Credits to Ace for making the amazing KnightBot logo.
+> Credits to the moderation team of our server for keeping it smooth.
