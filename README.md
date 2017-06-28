@@ -17,9 +17,7 @@ Open a terminal in the directory of the bots location and type
 ```
 $ python3 bot.py
 ```
-On first start the launcher will run and you will need to input data.
-
-After that the bot will launch without setup neccessary.
+On first start the launcher will run and you will need to input data. After that the bot will launch without setup neccessary, there is an optional reset configuration option on launch.
 
 ## Commands
 
@@ -30,3 +28,7 @@ The default set of modules includes:
 * Text tagging system
 * Work logging system
 * Tournament submission system
+
+## Support Me
+
+It would be greatly appreciated if you can support me by joining my discord server and socialising with me! Join it to stay up to date on updates and announcements. Stay for a good time! Join here: https://discord.io/kbot
