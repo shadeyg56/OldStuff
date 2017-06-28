@@ -8,9 +8,9 @@ Simple python discord bot that has useful features! Themed around Clash Royale a
 ## Requirements
 This is a *self-hosted bot* – meaning you will need to host and maintain your own instance.
 You need the following to run the bot:
-```diff
-- python 3.5
-- discord.py
+```py
+>>> python 3.5
+>>> discord.py
 ```
 ## Setup
 Open a terminal in the directory of the bots location and type
