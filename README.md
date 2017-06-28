@@ -31,8 +31,8 @@ The default set of modules includes:
 
 ## Support Me
 
-It would be greatly appreciated if you can support me by joining my discord server and socialising with me! Join it to stay up to date on updates and announcements. Stay for a good time! Join here: https://discord.io/kbot
-<img src='https://i.imgur.com/2GhOe8D.png'>
+It would be greatly appreciated if you can support me by joining my discord server and socialising with me! Join it to stay up to date on updates and announcements. Stay for a good time! Join here: https://discord.io/kbot <img src='https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg'>
+
 
 ### Credits
 
