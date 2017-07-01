@@ -225,8 +225,6 @@ class Misc():
         with open('cogs/utils/afk.json','w') as f:
             f.write(afk)
 
-        await self.bot.process_commands(message)
-
     # @commands.command(pass_context=True)
     # async def guess(self,ctx):
     #     def is_me(msg):
