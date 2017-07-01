@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 import datetime
-from .utils import config
+from .utils import launcher
 
-info = config.settings('COGS')
+info = launcher.settings()
 admin = info['admin_role']
 
 class Robolog:

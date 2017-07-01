@@ -4,14 +4,14 @@ from discord.ext import commands
 import datetime
 import time
 import configparser
-from .utils import config
+from .utils import launcher
 
 
 
-info = config.settings('COGS')
+info = launcher.settings()
 
 tournaments = info['tournaments']
-staffchat = info['admin_channel']
+staffchat = info['admin_chat']
 modrole = info['mod_role']
 
 
