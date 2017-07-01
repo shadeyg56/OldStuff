@@ -9,7 +9,7 @@ from cogs.utils import launcher
 import json
 
 
-launcher.check()
+#launcher.check()
  
 
 info = launcher.settings()
