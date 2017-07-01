@@ -10,7 +10,7 @@ from cogs.utils import launcher
 from cogs.utils import config
 
 
-launcher.check()
+#launcher.check()
  
 
 BOT = config.settings('BOT')
