@@ -3,9 +3,9 @@ import datetime
 import time
 from discord.ext import commands
 import asyncio
-from .utils import config
+from .utils import launcher
 
-info = config.settings('COGS')
+info = launcher.settings()
 mod_role = info['mod_role']
 
 class Mod():

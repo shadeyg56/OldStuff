@@ -5,6 +5,9 @@ import datetime
 import time
 import random
 import asyncio
+import json
+
+
 
 class Misc():
 
@@ -122,8 +125,8 @@ class Misc():
             await self.bot.say('`{}-virus.exe` successfully injected into **{}**\'s system.'.format(hack,user.name))
             await self.bot.send_message(user,'**Alert!**\n``You may have been hacked. {}-virus.exe has been found in your system\'s operating system.\nYour data may have been compromised. Please re-install your OS immediately.``'.format(hack))
         else:
-            await self.bot.say('**{}** has hacked himself ¯\_(ツ)_/¯.'.format(user.name))
-            await self.bot.send_message(nome,'**Alert!**\n``You may have been hacked. {}-virus.exe has been found in your system\'s operating system.\nYour data may have been compromised. Please re-install your OS immediately.``'.format(hack))
+            await self.bot.say('**{}** has hacked himself ¯\_(ツ)_/¯.'.format(name.name))
+            await self.bot.send_message(name,'**Alert!**\n``You may have been hacked. {}-virus.exe has been found in your system\'s operating system.\nYour data may have been compromised. Please re-install your OS immediately.``'.format(hack))
      
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
@@ -188,6 +191,65 @@ class Misc():
     async def invite(self, ctx):
         '''Returns the OAUTH invite linke'''
         await self.bot.say('https://discordapp.com/oauth2/authorize?client_id=326703531220271104&scope=bot&permissions=8')
+
+
+    @commands.command(pass_context=True)
+    async def afk(self,ctx,*,reason : str):
+        user = ctx.message.author
+        msg = ctx.message
+        afk = open('cogs/utils/afk.json').read()
+        afk = json.loads(afk)
+        afk[user.id] = reason
+        afk = json.dumps(afk)
+        x = await self.bot.say('You are now afk: {}'.format(reason))
+        with open('cogs/utils/afk.json', 'w') as f:
+            f.write(afk)
+        await asyncio.sleep(5)
+        await self.bot.delete_messages([x,msg])
+
+
+    async def on_message(self,message):
+        user = message.author
+        channel = message.channel
+        afk = open('cogs/utils/afk.json').read()
+        afk = json.loads(afk)
+        if user.id in afk:
+            del afk[user.id]
+            x = await self.bot.send_message(channel, 'You are now back from being afk.')
+        else:
+            mentions = message.mentions
+            for member in mentions:
+                if member.id in afk:
+                    y = await self.bot.send_message(channel, '**{}** is afk: *{}*'.format(member.name, afk[member.id]))
+        afk = json.dumps(afk)
+        with open('cogs/utils/afk.json','w') as f:
+            f.write(afk)
+
+        await self.bot.process_commands(message)
+
+    # @commands.command(pass_context=True)
+    # async def guess(self,ctx):
+    #     def is_me(msg):
+    #         return msg.author != self.bot.user
+    #     channel = ctx.message.channel
+    #     x = await self.bot.say('Enter a number:')
+    #     guess = await self.bot.wait_for_message(channel=channel,check=is_me)
+    #     num = random.randint(1,1000)
+    #     dif = abs(num-guess)
+    #     while guess != num:
+    #         print('Try Again!')
+    #         guess = await self.bot.
+    #         dif2 = abs(num-guess)
+    #         if dif2<dif:
+    #             if guess == num:
+    #                 break
+    #             print("Hotter")
+    #         elif dif2>dif:
+    #             print("Colder")
+    #         else:
+    #             print("Same Number!")
+    #         dif = dif2
+    #     print("Good Job! The number was: "+str(num))
 
     
 def setup(bot):

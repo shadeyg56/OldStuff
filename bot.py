@@ -4,19 +4,18 @@ from discord.ext import commands
 import datetime
 import time
 import sys
-import configparser
 import asyncio
 from cogs.utils import launcher
-from cogs.utils import config
+import json
 
 
-#launcher.check()
+launcher.check()
  
 
-BOT = config.settings('BOT')
-bot_prefix = BOT['bot_prefix']
-token = BOT['token']
-owner = BOT['owner']
+info = launcher.settings()
+bot_prefix = info['prefix']
+token = info['token']
+owner = info['owner']
 
 startup_extensions = [
     'cogs.info',
@@ -31,7 +30,7 @@ startup_extensions = [
 
 Client = discord.Client()
 description = ('A rogue Knight stumbled upon discord. '
-'Made by .verix \n')
+'Made by verix \n')
 bot = commands.Bot(description=description, command_prefix=bot_prefix, pm_help=None)
 
 @bot.event
@@ -44,7 +43,28 @@ async def on_ready():
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     print('------------------------------------')
- 
+
+
+
+# @bot.event
+# async def on_message(message):
+#     user = message.author
+#     channel = message.channel
+#     afk = open('cogs/utils/afk.json').read()
+#     afk = json.loads(afk)
+#     if user.id in afk:
+#         del afk[user.id]
+#         x = await self.bot.send_message(channel, 'You are now back from being afk.')
+#     else:
+#         mentions = message.mentions
+#         for member in mentions:
+#             if member.id in afk:
+#                 y = await self.bot.send_message(channel, '**{}** is afk: *{}*'.format(member.name, afk[member.id]))
+#     afk = json.dumps(afk)
+#     with open('cogs/utils/afk.json','w') as f:
+#         f.write(afk)
+        
+#     await bot.process_commands(message)
 
 def owner_only():
     return commands.check(lambda ctx: ctx.message.author == ctx.message.server.owner)

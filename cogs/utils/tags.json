@@ -1,22 +1,50 @@
 {
-  "git": [
-    "**This bot's GitHub page: ** https://github.com/verixx/knightBot",
-    "319395783847837696"
-  ],
   "invite": [
-    "https://discord.gg/6pjDhW9",
+    "**Join the development server here: ** <htpps://discord.io/kbot>",
     "319395783847837696"
   ],
   "crg": [
     "https://discord.gg/Wp33Ksa",
     "319395783847837696"
   ],
+  "rules": [
+    "**SERVER RULES:**\n\n`1.`  No spamming, even just saying the same thing over and over again.\n`2.`  No advertising a server of your own.\n`3.`  Respect one another. We do not tolerate abuse.\n`4.`  If you have an issue with a user, let a Mod or Admin know.\n`5.`  If you have any issues or suggestions, contact us in the suggestions channel.\n\n*Failure to follow the rules will result in a punishment (mute/warn/kick/ban).*",
+    "319395783847837696"
+  ],
+  "basic bot": [
+    "**discord.py examples:**\n<https://github.com/Rapptz/discord.py/tree/master/examples>",
+    "319395783847837696"
+  ],
   "clan": [
     "https://discord.gg/K3JT3GC",
     "319395783847837696"
   ],
+  "ping": [
+    "```py\n@bot.command(pass_context=True)\nasync def ping(ctx):\n  await bot.say('Pong!')\n```",
+    "319395783847837696"
+  ],
+  "discr": [
+    "**discr** is **verix's** alt acc.",
+    "325012556940836864"
+  ],
+  "git": [
+    "**The bot's GitHub page: **https://github.com/verixx/KnightBot",
+    "319395783847837696"
+  ],
   "api": [
     "https://discord.gg/discord-api",
+    "319395783847837696"
+  ],
+  "codeblock": [
+    "**How to write in Code Blocks:**\n`\n```mkd\n#hello\n``` `\n**Results in this:**\n```mkd\n#hello\n```",
+    "319395783847837696"
+  ],
+  "config": [
+    "```ini\n\n[BOT]\ntoken = token_here\nowner = owner_id\nbot_prefix = bot_prefix\n\n[COGS]\nadmin_role = Admin\nmod_role = Mod\nadmin_channel = admin\nannouncements = announcements\ntournaments = tournaments\n```",
+    "319395783847837696"
+  ],
+  "embeds": [
+    "**Visualizer:** https://leovoel.github.io/embed-visualizer/ \nhttps://i.imgur.com/26z7tyJ.png",
     "319395783847837696"
   ]
 }

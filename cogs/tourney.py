@@ -4,14 +4,14 @@ from discord.ext import commands
 import datetime
 import time
 import configparser
-from .utils import config
+from .utils import launcher
 
 
 
-info = config.settings('COGS')
+info = launcher.settings()
 
 tournaments = info['tournaments']
-staffchat = info['admin_channel']
+staffchat = info['admin_chat']
 modrole = info['mod_role']
 
 
@@ -180,6 +180,8 @@ class Tournament():
                     gems = word.strip()[5:].strip()
                 elif word.strip().lower().startswith('host='):
                     host = word.strip()[5:].strip()
+                    if host == 'me':
+                        host = user.name
                 elif word.strip().lower().startswith('tag='):
                     tag = word.strip()[4:].strip()
                 else:

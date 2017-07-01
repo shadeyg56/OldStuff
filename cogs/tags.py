@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 import json
 import difflib
-from .utils import config
+from .utils import launcher
 
-info = config.settings('COGS')
+info = launcher.settings()
 mod_role = info['mod_role']
 
 class Tags():
@@ -48,7 +48,7 @@ class Tags():
 
 
 	@commands.group(pass_context=True, invoke_without_command=True)
-	async def tag(self, ctx, name : str):
+	async def tag(self, ctx, *,name : str):
 		if ctx.invoked_subcommand is None:
 			data = open('cogs/utils/tags.json').read()
 			data = json.loads(data)
@@ -69,7 +69,7 @@ class Tags():
 		user = ctx.message.author
 		await self.make_tag(tag,content,user)
 
-	@tag.command(pass_context=True, aliases=['del','delete'])
+	@tag.command(name='del',pass_context=True, aliases=['d', 'delete'])
 	async def _del(self, ctx, name : str):
 		user = ctx.message.author
 		data = open('cogs/utils/tags.json').read()
@@ -92,9 +92,10 @@ class Tags():
 	async def tags(self,ctx):
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)
-		data = '\n'.join(data.keys())
+		data = ', '.join(data.keys())
+		data = data.strip(', ')
 		print(data)
-		data = '```\n'+data+'```'
+		data = '```brainfuck\n'+data+'```'
 		print(data)
 		await self.bot.say('**List of current tags:**\n'+data)
 
