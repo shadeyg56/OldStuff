@@ -1,7 +1,7 @@
 ![intro](https://i.imgur.com/MI9tq0B.png)
 # KnightBot <img src="https://i.imgur.com/f6wEKuu.png">
 #### *Moderation, admin, fun, utility commands and much more!*
-<img src='https://img.shields.io/badge/build-passing-brightgreen.svg'> [<img src="https://img.shields.io/badge/discord-py-orange.svg">](https://github.com/Rapptz/discord.py)  [<img src='https://img.shields.io/badge/python-3.5-brightgreen.svg'>](https://python.org)
+<img src='https://img.shields.io/badge/build-passing-brightgreen.svg'> [<img src="https://img.shields.io/badge/discord-py-orange.svg">](https://github.com/Rapptz/discord.py) [<img src='https://img.shields.io/badge/python-3.5-brightgreen.svg'>](https://python.org)
 
 
 [<img src="https://discordapp.com/api/guilds/323349192837693440/widget.png?style=banner2">](https://discord.gg/JVw6nhD) 
