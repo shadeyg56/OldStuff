@@ -1,7 +1,8 @@
 ![intro](https://i.imgur.com/MI9tq0B.png)
 # KnightBot <img src="https://i.imgur.com/f6wEKuu.png">
 #### *Moderation, admin, fun, utility commands and much more!*
-[<img src="https://discordapp.com/api/guilds/323349192837693440/widget.png?style=shield">](https://discord.gg/JVw6nhD) <img src='https://img.shields.io/badge/build-passing-brightgreen.svg'> [<img src="https://img.shields.io/badge/discord-py-orange.svg">](https://github.com/Rapptz/discord.py) <img src='https://img.shields.io/badge/python-3.5-brightgreen.svg'> [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[<img src="https://discordapp.com/api/guilds/323349192837693440/widget.png?style=banner">](https://discord.gg/JVw6nhD) <img src='https://img.shields.io/badge/build-passing-brightgreen.svg'> [<img src="https://img.shields.io/badge/discord-py-orange.svg">](https://github.com/Rapptz/discord.py) <img src='https://img.shields.io/badge/python-3.5-brightgreen.svg'> 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
 Simple python discord bot that has useful features! Themed around Clash Royale and made by verix.
