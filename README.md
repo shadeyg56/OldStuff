@@ -22,6 +22,12 @@ $ python3 bot.py
 ```
 On first start the launcher will run and you will need to input data. After that the bot will launch without setup neccessary, there is an optional reset configuration option on launch.
 
+### Config Command
+```css
+.config set
+```
+This command gives you an interactive way to configure Mod-roles, admin-roles, channels etc. 
+
 ## Commands
 
 The default set of modules includes:
