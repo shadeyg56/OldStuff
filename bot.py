@@ -9,15 +9,17 @@ from cogs.utils import launcher
 import json
 
 
-#launcher.check()
+##launcher.check()
  
 
-info = launcher.settings()
-bot_prefix = info['prefix']
+info = launcher.bot()
 token = info['token']
 owner = info['owner']
 
+
+
 startup_extensions = [
+
     'cogs.info',
     'cogs.misc',
     'cogs.mod',
@@ -25,13 +27,27 @@ startup_extensions = [
     'cogs.tourney',
     'cogs.polls',
     'cogs.robolog',
-    'cogs.tags'
+    'cogs.tags',
+    'cogs.setup'
 ]
 
 Client = discord.Client()
 description = ('A rogue Knight stumbled upon discord. '
 'Made by verix \n')
-bot = commands.Bot(description=description, command_prefix=bot_prefix, pm_help=None)
+
+
+async def get_pre(bot, message):
+    with open('cogs/utils/t_config.json') as f:
+        config = json.loads(f.read())
+    try:
+        if message.server.id not in config:
+            return '.'
+    except:
+        pass
+    else:
+        return config[message.server.id]['prefix']
+
+bot = commands.Bot(description=description, command_prefix=get_pre, pm_help=None)
 
 @bot.event
 async def on_ready():
@@ -45,27 +61,6 @@ async def on_ready():
     print('------------------------------------')
 
 
-
-# @bot.event
-# async def on_message(message):
-#     user = message.author
-#     channel = message.channel
-#     afk = open('cogs/utils/afk.json').read()
-#     afk = json.loads(afk)
-#     if user.id in afk:
-#         del afk[user.id]
-#         x = await self.bot.send_message(channel, 'You are now back from being afk.')
-#     else:
-#         mentions = message.mentions
-#         for member in mentions:
-#             if member.id in afk:
-#                 y = await self.bot.send_message(channel, '**{}** is afk: *{}*'.format(member.name, afk[member.id]))
-#     afk = json.dumps(afk)
-#     with open('cogs/utils/afk.json','w') as f:
-#         f.write(afk)
-        
-#     await bot.process_commands(message)
-
 def owner_only():
     return commands.check(lambda ctx: ctx.message.author == ctx.message.server.owner)
 
@@ -77,7 +72,6 @@ def is_owner():
 async def on_message_edit(before,after):
         with open('cogs/utils/log.txt','a') as log:
             log.write(after.content + '\n')
-
         
 @bot.event
 async def on_member_join(member):
@@ -105,25 +99,25 @@ async def send_cmd_help(ctx):
         for page in pages:
             await bot.send_message(ctx.message.channel, page)
 
-@bot.event
-async def on_command_error(error, ctx):
-    channel = ctx.message.channel
-    if isinstance(error, commands.MissingRequiredArgument):
-        await send_cmd_help(ctx)
-    elif isinstance(error, commands.BadArgument):
-        await send_cmd_help(ctx)
-    elif isinstance(error, commands.DisabledCommand):
-        await bot.send_message(channel, "That command is disabled.")
-    elif isinstance(error, commands.CommandInvokeError):
-        # A bit hacky, couldn't find a better way
-        no_dms = "Cannot send messages to this user"
-        is_help_cmd = ctx.command.qualified_name == "help"
-        is_forbidden = isinstance(error.original, discord.Forbidden)
-        if is_help_cmd and is_forbidden and error.original.text == no_dms:
-            msg = ("I couldn't send the help message to you in DM. Either"
-                   " you blocked me or you disabled DMs in this server.")
-            await bot.send_message(channel, msg)
-            return
+##@bot.event
+##async def on_command_error(error, ctx):
+##   channel = ctx.message.channel
+##   if isinstance(error, commands.MissingRequiredArgument):
+##       await send_cmd_help(ctx)
+##   elif isinstance(error, commands.BadArgument):
+##       await send_cmd_help(ctx)
+##   elif isinstance(error, commands.DisabledCommand):
+##       await bot.send_message(channel, "That command is disabled.")
+##   elif isinstance(error, commands.CommandInvokeError):
+##       # A bit hacky, couldn't find a better way
+##       no_dms = "Cannot send messages to this user"
+##       is_help_cmd = ctx.command.qualified_name == "help"
+##       is_forbidden = isinstance(error.original, discord.Forbidden)
+##       if is_help_cmd and is_forbidden and error.original.text == no_dms:
+##           msg = ("I couldn't send the help message to you in DM. Either"
+##                  " you blocked me or you disabled DMs in this server.")
+##           await bot.send_message(channel, msg)
+##           return
 
 @bot.command(pass_context=True,name='cog')
 @owner_only()
@@ -143,7 +137,7 @@ async def _reload(ctx,*, module : str):
         x = await bot.edit_message(x,'Done. \N{OK HAND SIGN}')
 
 @bot.command(name='presence',hidden=True)
-@commands.has_role('Mod')
+@is_owner()
 async def _set(Type=None,*,thing=None):
         if Type is None:
                 await bot.say('Usage: `.presence [game/stream] [message]`')
@@ -160,7 +154,15 @@ async def _set(Type=None,*,thing=None):
                         await bot.say('Done.')
                 else:
                         await bot.say('Usage: `.presence [game/stream] [message]`')
-                        
+
+@bot.command(pass_context=True)
+@is_owner()
+async def _leave_all_servers_(ctx):
+    for server in bot.servers:
+        await bot.leave_server(server)
+        await bot.say('I left `{}`'.format(server.name))
+
+
 
 
 if __name__ == "__main__":

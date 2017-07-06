@@ -4,9 +4,17 @@ from discord.ext import commands
 import datetime
 import time
 import random
+from PythonGists import PythonGists
+import json
+from .utils import launcher
+
+info = launcher.bot()
+owner = info['owner']
 
 
 class Info():
+
+
     def __init__(self, bot):
         self.bot = bot
         
@@ -54,7 +62,7 @@ class Info():
         data.set_footer(text="Server ID: " + server.id)
 
         if server.icon_url:
-            data.set_author(name=server.name, url=server.icon_url)
+            data.set_author(name=server.name, icon_url=server.icon_url)
             data.set_thumbnail(url=server.icon_url)
         else:
             data.set_author(name=server.name)
@@ -116,6 +124,47 @@ class Info():
         em = discord.Embed(color=colour)
         em.set_image(url=avi)
         await self.bot.say(embed=em)
+
+    async def send_cmd_help(self,ctx):
+        if ctx.invoked_subcommand:
+            pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
+            for page in pages:
+                await self.bot.send_message(ctx.message.channel, page)
+        else:
+            pages = self.bot.formatter.format_help_for(ctx, ctx.command)
+            for page in pages:
+                await self.bot.send_message(ctx.message.channel, page)
+
+    def owner_only():
+        return commands.check(lambda ctx: ctx.message.author == ctx.message.server.owner)
+
+    def is_owner():
+        return commands.check(lambda ctx: ctx.message.author.id == owner)
+
+    @commands.group(pass_context=True)
+    @is_owner()
+    async def backup(self,ctx):
+        """Backup raw data for storage"""
+        if ctx.invoked_subcommand is None:
+            await self.send_cmd_help(ctx)
+
+    @backup.command(pass_context=True)
+    async def tags(self,ctx):
+        tags = open('cogs/utils/tags.json').read()
+        url = PythonGists.Gist(description='All current tags', content=str(tags), name='tags.txt')
+        em = discord.Embed(description="[raw tags data]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
+
+    @backup.command(pass_context=True)
+    async def config(self,ctx):
+        cfg = open('cogs/utils/t_config.json').read()
+        url = PythonGists.Gist(description='All current tags', content=str(cfg), name='config.txt')
+        em = discord.Embed(description="[raw config data]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
+
+
+
+
 
 
 def setup(bot):

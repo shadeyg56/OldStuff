@@ -5,15 +5,30 @@ from discord.ext import commands
 import asyncio
 from .utils import launcher
 
-info = launcher.settings()
-mod_role = info['mod_role']
+info = launcher.bot()
+token = info['token']
+owner = info['owner']
 
 class Mod():
     def __init__(self, bot):
         self.bot = bot
 
-    async def modlog(self,Type,user,moderator,time,reason=None):
-        channel = discord.Object(id=325718146243624970)
+    def mod(ctx):
+        info = launcher.config()
+        server = ctx.message.server
+        modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        modrole = modrole.name
+        author = ctx.message.author
+        return discord.utils.get(author.roles,name=modrole)
+
+    def server_cfg(self,ctx):
+        server = ctx.message.server
+        info = launcher.config()
+        mod_log = self.bot.get_channel(info[server.id]['mod_log'])
+        return mod_log
+
+    async def modlog(self,ctx,Type,user,moderator,time,reason=None):
+        channel = self.server_cfg(ctx)
         clr = 0
         red = ['Kick','Ban','Soft-Ban']
         orange = ['Warn','Mute']
@@ -53,7 +68,7 @@ class Mod():
 
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def kick(self,ctx, member : discord.Member,*,reason=None):
         '''Kick someone out of the server.'''
         mod = ctx.message.author
@@ -62,7 +77,7 @@ class Mod():
             if not discord.utils.get(member.roles, name='Mod'):
                 await self.bot.kick(member)
                 await self.bot.say('Done. That felt good.')
-                await self.modlog('Kick',member,mod,time,reason)
+                await self.modlog(ctx,'Kick',member,mod,time,reason)
             else:
                 await self.bot.say('I cant kick a Mod.')
 
@@ -71,7 +86,7 @@ class Mod():
 
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def ban(self,ctx, member : discord.Member,*,reason=None):
         '''Ban someone from the server'''
         mod = ctx.message.author
@@ -80,7 +95,7 @@ class Mod():
             if not discord.utils.get(member.roles, name='Mod'):
                 await self.bot.ban(member)
                 await self.bot.say('Done. Enough Chaos.')
-                await self.modlog('Ban',member,mod,time,reason)
+                await self.modlog(ctx,'Ban',member,mod,time,reason)
             else:
                 await self.bot.say('Dont try.')
 
@@ -88,7 +103,7 @@ class Mod():
             await self.bot.say("Bot ain't got the perms lad.")
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def softban(self,ctx, member : discord.Member,*,reason=None):
         '''Kick someone out and delete their messages.'''
         mod = ctx.message.author
@@ -98,7 +113,7 @@ class Mod():
                 await self.bot.ban(member)
                 await self.bot.unban(member.server,member)
                 await self.bot.say('Done. Eleeectronss.')
-                await self.modlog('Soft-Ban',member,mod,time,reason)
+                await self.modlog(ctx,'Soft-Ban',member,mod,time,reason)
             else:
                 await self.bot.say('Dont try.')
 
@@ -106,7 +121,7 @@ class Mod():
             await self.bot.say("Bot ain't got the perms lad.")
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def unban(self,ctx,member : str,*,reason=None):
         '''Unban someone using their user ID.'''
         server = ctx.message.server
@@ -116,12 +131,12 @@ class Mod():
         try:
             await self.bot.unban(server, mem)
             await self.bot.say('Done. Eleeectronss.')
-            await self.modlog('Unban',member,mod,time,reason)
+            await self.modlog(ctx,'Unban',member,mod,time,reason)
         except discord.Forbidden:
             await self.bot.say("Bot ain't got the perms lad.")
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def mute(self,ctx,member: discord.Member,*,reason=None):
         '''Mute or Unmute someone.'''
         server = ctx.message.server
@@ -133,7 +148,7 @@ class Mod():
                 try:
                     await self.bot.add_roles(member,role)
                     await self.bot.say('{0.mention} is now muted.'.format(member))
-                    await self.modlog('Mute',member,mod,time,reason)
+                    await self.modlog(ctx,'Mute',member,mod,time,reason)
                 except discord.Forbidden:
                     await self.bot.say('I dont have the perms.')
             else:
@@ -143,7 +158,7 @@ class Mod():
             await self.bot.say('You cant mute mods.')
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def purge(self, ctx, number: int):
         '''Delete a specified amount of messages.'''
 
@@ -179,25 +194,22 @@ class Mod():
                 messages = []
             await asyncio.sleep(1.5)
 
-
     @commands.command(pass_context = True,no_pm = True)
-    @commands.has_role(mod_role)
-    async def msg(self,ctx,*message):
+    async def msg(self,ctx,*,msg : str):
+        server = ctx.message.server
         '''Message everyone in the server.'''
-        if ctx.message.author == ctx.message.server.owner:
-                for server in self.bot.servers:
-                    for member in server.members:
-                        msg = ' '.join(message)
-                        try:
-                            await self.bot.send_message(member, msg)
-                            print(member)
-                        except:
-                            print(member, "has DM's turned off")
+        if ctx.message.author == ctx.message.server.owner or ctx.message.author.id == owner:
+            for member in server.members:
+                try:
+                    await self.bot.send_message(member, msg)
+                    print(member)
+                except:
+                    print(member, "has DM's turned off")
         else:
-            await self.bot.say('Only the server owner can do this.')
+            await self.bot.say('Server owner only.')
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def warn(self,ctx, member : discord.Member=None,*,reason=None):
         '''Warn someone in the server.'''
         mod = ctx.message.author
@@ -223,7 +235,7 @@ class Mod():
 
 
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def clean(self, ctx):
         '''Clean up bot messages and command calls.'''
 
@@ -250,7 +262,7 @@ class Mod():
         await self.bot.delete_message(x)
            
     @commands.command(pass_context=True)
-    @commands.has_role(mod_role)
+    @commands.check(mod)
     async def role(self,ctx, member: discord.Member,*,roles=None):
         '''Give a role or a list of roles to someone.'''
         roles = roles.split(',')

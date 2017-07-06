@@ -4,12 +4,14 @@ import json
 import difflib
 from .utils import launcher
 
-info = launcher.settings()
-mod_role = info['mod_role']
+
 
 class Tags():
 	def __init__(self, bot):
 		self.bot = bot
+
+	
+
 
 	async def make_tag(self, tag, content, user):
 		data = open('cogs/utils/tags.json').read()
@@ -24,9 +26,13 @@ class Tags():
 				f.write(data)
 			await self.bot.say('Successfuly created tag.')
 
-	async def edit_tag(self, tag, content, user):
+	async def edit_tag(self,ctx, tag, content, user):
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)
+		info = launcher.config()
+		server = ctx.message.server
+		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+		modrole = modrole.name
 
 		if tag not in data:
 			possible_matches = difflib.get_close_matches(tag, tuple(data.keys()))
@@ -36,9 +42,8 @@ class Tags():
 				possible_matches = ['`'+i+'`' for i in possible_matches]
 				await self.bot.say(('Tag not found. Did you mean: ' + ', '.join(possible_matches)).strip(', '))
 
-		if data[tag][1] == user or discord.utils.get(user.roles, name=mod_role):
+		if data[tag][1] == user or discord.utils.get(user.roles, name=modrole):
 			data[tag] = [content,user.id]
-			print(data)
 			data = json.dumps(data, indent=2)
 			with open('cogs/utils/tags.json', 'w') as f:
 				f.write(data)
@@ -49,6 +54,7 @@ class Tags():
 
 	@commands.group(pass_context=True, invoke_without_command=True)
 	async def tag(self, ctx, *,name : str):
+		"""Tag related commands, store text"""
 		if ctx.invoked_subcommand is None:
 			data = open('cogs/utils/tags.json').read()
 			data = json.loads(data)
@@ -71,6 +77,10 @@ class Tags():
 
 	@tag.command(name='del',pass_context=True, aliases=['d', 'delete'])
 	async def _del(self, ctx, name : str):
+		info = launcher.config()
+		server = ctx.message.server
+		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+		modrole = modrole.name
 		user = ctx.message.author
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)
@@ -86,10 +96,11 @@ class Tags():
 	@tag.command(pass_context=True)
 	async def edit(self, ctx, tag: str, *, content):
 		user = ctx.message.author
-		await self.edit_tag(tag,content,user)
+		await self.edit_tag(ctx,tag,content,user)
 
 	@commands.command(pass_context=True)
 	async def tags(self,ctx):
+		"""Shows all the tags"""
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)
 		data = ', '.join(data.keys())
@@ -98,6 +109,10 @@ class Tags():
 		data = '```brainfuck\n'+data+'```'
 		print(data)
 		await self.bot.say('**List of current tags:**\n'+data)
+
+
+
+
 
 
 def setup(bot):

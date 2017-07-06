@@ -1,7 +1,10 @@
 import json
+import discord
+from discord.ext import commands
+
 
 def launch():
-    config = open('cogs/utils/config.json').read()
+    config = open('cogs/utils/t_config.json').read()
     config = json.loads(config)
     print('-----------------------------------')
     print('Welcome to the KnightBot Launcher!')
@@ -10,66 +13,60 @@ def launch():
     print('-----------------------------------')
     token = input('Bot Token \n> ')
     owner = input('Owner ID \n> ')
-    prefix = input('Bot Prefix\n> ')
-    admin = input('Admin Role \n> ')
-    mod = input('Mod Role \n> ')
-    admin_chat = input('Admin Chat \n> ')
-    announcements = input('Announcement Channel \n> ')
-    tournaments = input('Tournament Channel \n> ')
     print('-----------------------------------')
-    print('Please wait while we input your data.')
     print('-----------------------------------')
-    config['token'] = token
-    config['owner'] = owner
-    config['prefix'] = prefix
-    config['admin_role'] = admin
-    config['mod_role'] = mod
-    config['admin_chat'] = admin_chat
-    config['announcements'] = announcements
-    config['tournaments'] = tournaments
-    config['opened'] = 1
+    config['bot']['token'] = token
+    config['bot']['owner'] = owner
+    config['bot']['opened'] = 1
 
     if input('Launch Bot?\n> ').lower() == 'yes':
-        config = json.dumps(config)
-        with open('cogs/utils/config.json', 'w') as configfile:
+        config = json.dumps(config, indent=4, sort_keys=True)
+        with open('cogs/utils/t_config.json', 'w') as configfile:
             configfile.write(config)
         pass
     else:
         check()
 
 def check():
-    config = open('cogs/utils/config.json').read()
+    config = open('cogs/utils/t_config.json').read()
     config = json.loads(config)
-    x = config['opened']
+    x = config['bot']['opened']
     if x == 0:
         x += 1
-        config['opened'] = x
+        config['bot']['opened'] = x
         launch()
     else:
         print('You have already set your configuration.')
         if input('Reset configuration?\n> ').lower() == 'yes':
-            config['token'] = None
-            config['owner'] = None
-            config['prefix'] = None
-            config['admin_role'] = None
-            config['mod_role'] = None
-            config['admin_chat'] = None
-            config['announcements'] = None
-            config['tournaments'] = None
-            config['opened'] = 0
+            config['bot']['token'] = None
+            config['bot']['owner'] = None
+            config['bot']['opened'] = 0
 
-            config = json.dumps(config)
+            config = json.dumps(config, indent=4, sort_keys=True)
 
-            with open('cogs/utils/config.json', 'w') as configfile:
+            with open('cogs/utils/t_config.json', 'w') as configfile:
                 configfile.write(config)
             launch()
         else:
             pass
 
 
+def bot():
+    config = open("cogs/utils/t_config.json").read()
+    config = json.loads(config)
+    return config['bot']
+
+def config():
+    config = open("cogs/utils/t_config.json").read()
+    config = json.loads(config)
+    return config
+
 def settings():
     config = open("cogs/utils/config.json").read()
     config = json.loads(config)
     return config
+
+
+
 
 

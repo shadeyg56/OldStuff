@@ -3,8 +3,6 @@ from discord.ext import commands
 import datetime
 from .utils import launcher
 
-info = launcher.settings()
-admin = info['admin_role']
 
 class Robolog:
 	def __init__(self, bot):	
@@ -15,6 +13,15 @@ class Robolog:
 		day = datetime.datetime.now()
 		day = day.strftime("%d/%m/%Y")
 		return day
+
+	def mod(ctx):
+		info = launcher.config()
+		server = ctx.message.server
+		modrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
+		modrole = modrole.name
+		author = ctx.message.author
+		return discord.utils.get(author.roles,name=modrole)
+
 
 	async def send_cmd_help(self,ctx):
 		if ctx.invoked_subcommand:
@@ -27,7 +34,7 @@ class Robolog:
 				await self.bot.send_message(ctx.message.channel, page)
 
 	@commands.group(pass_context=True)
-	@commands.has_role(admin)
+	@commands.check(mod)
 	async def log(self, ctx):
 		"""Robotics Log Commands"""
 		if ctx.invoked_subcommand is None:

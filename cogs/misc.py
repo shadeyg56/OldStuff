@@ -134,6 +134,7 @@ class Misc():
 
     @commands.group(name='self',pass_context=True,description='Selfrole commands for set roles')
     async def self_(self,ctx):
+        """Selfrole commands"""
         if ctx.invoked_subcommand is None:
             await self.send_cmd_help(ctx)
 
@@ -225,29 +226,22 @@ class Misc():
         with open('cogs/utils/afk.json','w') as f:
             f.write(afk)
 
-    # @commands.command(pass_context=True)
-    # async def guess(self,ctx):
-    #     def is_me(msg):
-    #         return msg.author != self.bot.user
-    #     channel = ctx.message.channel
-    #     x = await self.bot.say('Enter a number:')
-    #     guess = await self.bot.wait_for_message(channel=channel,check=is_me)
-    #     num = random.randint(1,1000)
-    #     dif = abs(num-guess)
-    #     while guess != num:
-    #         print('Try Again!')
-    #         guess = await self.bot.
-    #         dif2 = abs(num-guess)
-    #         if dif2<dif:
-    #             if guess == num:
-    #                 break
-    #             print("Hotter")
-    #         elif dif2>dif:
-    #             print("Colder")
-    #         else:
-    #             print("Same Number!")
-    #         dif = dif2
-    #     print("Good Job! The number was: "+str(num))
+
+    @commands.command(pass_context=True)
+    async def guess(self,ctx):
+        def is_me(msg):
+            return msg.author != self.bot.user and m.content.isdigit()
+        await self.bot.say
+        guess = await client.wait_for_message(timeout=5.0, check=is_me)
+        answer = random.randint(1, 10)
+        if guess is None:
+            fmt = 'Sorry, you took too long. It was {}.'
+            await client.send_message(message.channel, fmt.format(answer))
+            return
+        if int(guess.content) == answer:
+            await client.send_message(message.channel, 'You are right!')
+        else:
+            await client.send_message(message.channel, 'Sorry. It is actually {}.'.format(answer))
 
     
 def setup(bot):

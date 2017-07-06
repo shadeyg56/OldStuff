@@ -1,0 +1,79 @@
+{
+    "194398918975422464": {
+        "admin_chat": "268212570362609665",
+        "admin_role": null,
+        "announcements": "mod_chat",
+        "mod_log": "mod_chat",
+        "mod_role": "268208806264176640",
+        "prefix": "Bot",
+        "tournaments": "announcements"
+    },
+    "253580494225145856": {
+        "admin_chat": "wtf",
+        "admin_role": null,
+        "announcements": "",
+        "mod_log": "",
+        "mod_role": null,
+        "prefix": "lol",
+        "tournaments": ""
+    },
+    "292201624967970816": {
+        "admin_chat": "321264304978526208",
+        "admin_role": "292648282600243200",
+        "announcements": "292262764339134464",
+        "mod_log": "292261305526779904",
+        "mod_role": "292258290493292545",
+        "prefix": ".",
+        "tournaments": "304180827447754753"
+    },
+    "295288260656365571": {
+        "admin_chat": "332532239642525697",
+        "admin_role": "318313652359004170",
+        "announcements": "318317182851219457",
+        "mod_log": "330983022285291520",
+        "mod_role": "318313652359004170",
+        "prefix": ".",
+        "tournaments": "318317182851219457"
+    },
+    "316419777386250251": {
+        "admin_chat": "332549621647933470",
+        "admin_role": "320590079183552512",
+        "announcements": "325125088510869517",
+        "mod_log": "322576248284905474",
+        "mod_role": "323536134200360964",
+        "prefix": ".",
+        "tournaments": "325125088510869517"
+    },
+    "323349192837693440": {
+        "admin_chat": "325224996475633664",
+        "admin_role": "325047830668640266",
+        "announcements": "325224295087210496",
+        "mod_log": "325718146243624970",
+        "mod_role": "325229153341407233",
+        "prefix": ".",
+        "tournaments": "326889323360288779"
+    },
+    "328782470617104386": {
+        "admin_chat": "328782470617104386",
+        "admin_role": "328784009222160384",
+        "announcements": "330120969320398850",
+        "mod_log": "332493362206605313",
+        "mod_role": "328783902401626114",
+        "prefix": ".",
+        "tournaments": "330120969320398850"
+    },
+    "332570183782760448": {
+        "admin_chat": "admin",
+        "admin_role": null,
+        "announcements": "announcements",
+        "mod_log": "modlog",
+        "mod_role": null,
+        "prefix": "!",
+        "tournaments": "tournaments"
+    },
+    "bot": {
+        "opened": 1,
+        "owner": "319395783847837696",
+        "token": "MzI2NzAzNTMxMjIwMjcxMTA0.DCqp-w.XimlqiyQEkoF9AjkZLjUZ9Mefik"
+    }
+}

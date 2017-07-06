@@ -8,20 +8,23 @@ from .utils import launcher
 
 
 
-info = launcher.settings()
-
-tournaments = info['tournaments']
-staffchat = info['admin_chat']
-modrole = info['mod_role']
-
 
 class Embed():
     def __init__(self, bot):
         self.bot = bot
+        
+    def mod(ctx):
+        info = launcher.config()
+        server = ctx.message.server
+        modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        modrole = modrole.name
+        author = ctx.message.author
+        return discord.utils.get(author.roles,name=modrole)
+
 
 
     @commands.command(pass_context=True,description='Do .embed to see how to use it.')
-    @commands.has_role('Mod')
+    @commands.check(mod)
     async def embed(self, ctx, *, msg: str = None):
         '''Embed complex rich embeds as the bot.'''
         try:

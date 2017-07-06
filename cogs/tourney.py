@@ -7,28 +7,14 @@ import configparser
 from .utils import launcher
 
 
-
-info = launcher.settings()
-
-tournaments = info['tournaments']
-staffchat = info['admin_chat']
-modrole = info['mod_role']
-
-
 class Tournament():
+
+
+
     def __init__(self, bot):
         self.bot = bot
 
 
-    async def send_cmd_help(self,ctx):
-        if ctx.invoked_subcommand:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
-        else:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.command)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
 
     async def embtourney(self,user,name,pword,gems,host):
 
@@ -57,7 +43,7 @@ class Tournament():
 
     async def modtourney(self,user,name,pword,gems,host):
             
-        desc = '**{}** submiited a tournament. `disapprove` / `approve`'.format(user.name)
+        desc = '**{}** submitted a tournament. `disapprove` / `approve`'.format(user.name)
         name = '`'+name+'`'
         pword = '`'+pword+'`'
         gems = '`'+gems+'`'
@@ -73,17 +59,42 @@ class Tournament():
         emb.set_thumbnail(url='http://vignette4.wikia.nocookie.net/clashroyale/images/a/a7/TournamentIcon.png')
         emb.set_footer(text='User ID: '+str(user.id))
         return emb
+
+    async def send_cmd_help(self,ctx):
+        if ctx.invoked_subcommand:
+            pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
+            for page in pages:
+                await self.bot.send_message(ctx.message.channel, page)
+        else:
+            pages = self.bot.formatter.format_help_for(ctx, ctx.command)
+            for page in pages:
+                await self.bot.send_message(ctx.message.channel, page)
+                
     
+    def server_cfg(self,ctx):
+        server = ctx.message.server
+        info = launcher.config()
+        tournaments = self.bot.get_channel(info[server.id]['tournaments'])
+        tournaments = tournaments.name
+        staffchat = self.bot.get_channel(info[server.id]['admin_chat'])
+        staffchat = staffchat.name
+        modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        modrole = modrole.name
+        return {'t':tournaments,'s':staffchat,'m':modrole}
+
     @commands.group(pass_context=True,description='Tournament submission commands!')
     async def tournament(self,ctx):
         '''Exclusive Clash Royale tournament commands.'''
         if ctx.invoked_subcommand is None:
             await self.send_cmd_help(ctx)
 
-
     @tournament.command(pass_context=True,description = 'Request to post a tourney. ')
     async def submit(self,ctx):
         '''Submit a tournament interactively'''
+        info = self.server_cfg(ctx)
+        modrole = info['m']
+        staffchat = info['s']
+        tournaments = info['t']
         server = ctx.message.server
         user = ctx.message.author
         channel = ctx.message.channel
@@ -152,17 +163,26 @@ class Tournament():
                                 await self.bot.send_message(admin, '*Enter a valid answer.*')
                                 approval = await self.bot.wait_for_message(channel=admin,check=is_me)                           
                     else:
-                        await self.bot.say('Submission cancelled.')
+                        await self.bot.say('Submission canceled.')
                 else:
-                    await self.bot.say('Submission cancelled.')
+                    await self.bot.say('Submission canceled.')
             else:
-                await self.bot.say('Submission cancelled.')
+                await self.bot.say('Submission canceled.')
         else:
-            await self.bot.say('Submission cancelled.')
+            await self.bot.say('Submission canceled.')
+
+
+    def mod(ctx):
+        info = launcher.config()
+        server = ctx.message.server
+        modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        modrole = modrole.name
+        author = ctx.message.author
+        return discord.utils.get(author.roles,name=modrole)
 
 
     @tournament.command(pass_context=True,description='.tournament post name=name | pass=pass | gems=gems | host=host | tag=tag')
-    @commands.has_role(modrole)
+    @commands.check(mod)
     async def post(self,ctx,*,msg : str):
         '''Lets moderators post tournaments.'''
         user = ctx.message.author
