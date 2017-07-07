@@ -1,5 +1,1 @@
 
-+ 07/07/2017
-- Made the bot compatible on multiple servers with correspondig configurations.
-- Need to make .config set easier to use.
-- Need to put more error handling
