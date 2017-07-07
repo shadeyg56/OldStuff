@@ -1,6 +1,6 @@
 import discord
-from discord.ext.commands import Bot
-from discord.ext import commands
+from ext.commands import Bot
+from ext import commands
 import datetime
 import time
 import random
@@ -73,6 +73,7 @@ class Misc():
     @commands.command(pass_context=True,description='Response time is in ms.')
     async def ping(self,ctx):
         '''Check response time.'''
+
         msgtime = ctx.message.timestamp.now()
         await (await self.bot.ws.ping())
         now = datetime.datetime.now()
@@ -225,6 +226,8 @@ class Misc():
         afk = json.dumps(afk)
         with open('cogs/utils/afk.json','w') as f:
             f.write(afk)
+
+
 
 
     @commands.command(pass_context=True)

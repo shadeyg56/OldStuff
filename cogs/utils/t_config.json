@@ -8,15 +8,6 @@
         "prefix": "Bot",
         "tournaments": "announcements"
     },
-    "253580494225145856": {
-        "admin_chat": "wtf",
-        "admin_role": null,
-        "announcements": "",
-        "mod_log": "",
-        "mod_role": null,
-        "prefix": "lol",
-        "tournaments": ""
-    },
     "292201624967970816": {
         "admin_chat": "321264304978526208",
         "admin_role": "292648282600243200",
@@ -35,6 +26,15 @@
         "prefix": ".",
         "tournaments": "318317182851219457"
     },
+    "312813135264219138": {
+        "admin_chat": "312813135264219138",
+        "admin_role": "328915013370773505",
+        "announcements": "312813135264219138",
+        "mod_log": "312813135264219138",
+        "mod_role": "328915013370773505",
+        "prefix": ".",
+        "tournaments": "312813135264219138"
+    },
     "316419777386250251": {
         "admin_chat": "332549621647933470",
         "admin_role": "320590079183552512",
@@ -50,8 +50,27 @@
         "announcements": "325224295087210496",
         "mod_log": "325718146243624970",
         "mod_role": "325229153341407233",
+        "name": "KnightBot [Beta]",
         "prefix": ".",
         "tournaments": "326889323360288779"
+    },
+    "325609579138514945": {
+        "admin_chat": "332587461886607364",
+        "admin_role": "325613132494012416",
+        "announcements": "325614053882068992",
+        "mod_log": "332588765400924160",
+        "mod_role": "325613095622017026",
+        "prefix": ".",
+        "tournaments": "331930077967286272"
+    },
+    "327106262472982529": {
+        "admin_chat": "327106262472982529",
+        "admin_role": null,
+        "announcements": "327106262472982529",
+        "mod_log": "327106262472982529",
+        "mod_role": null,
+        "prefix": "+",
+        "tournaments": "327106262472982529"
     },
     "328782470617104386": {
         "admin_chat": "328782470617104386",
@@ -59,21 +78,40 @@
         "announcements": "330120969320398850",
         "mod_log": "332493362206605313",
         "mod_role": "328783902401626114",
+        "name": "Robotics",
         "prefix": ".",
         "tournaments": "330120969320398850"
     },
-    "332570183782760448": {
-        "admin_chat": "admin",
+    "332583075089350666": {
+        "admin_chat": "332585116964749312",
+        "admin_role": "332584003137830915",
+        "announcements": "332584860126543872",
+        "mod_log": "332585057757691904",
+        "mod_role": "332584003137830915",
+        "prefix": ".",
+        "tournaments": "332584860126543872"
+    },
+    "332843624633204747": {
+        "admin_chat": "332848474968031232",
         "admin_role": null,
-        "announcements": "announcements",
-        "mod_log": "modlog",
+        "announcements": "332843901222256651",
+        "mod_log": "332843855215067147",
         "mod_role": null,
-        "prefix": "!",
-        "tournaments": "tournaments"
+        "prefix": "-",
+        "tournaments": "None"
+    },
+    "81384788765712384": {
+        "admin_chat": "81402706320699392",
+        "admin_role": null,
+        "announcements": "81402706320699392",
+        "mod_log": "81402706320699392",
+        "mod_role": null,
+        "prefix": "k.",
+        "tournaments": "81402706320699392"
     },
     "bot": {
         "opened": 1,
         "owner": "319395783847837696",
-        "token": "TOKEN HERE"
+        "token": "MzI2NzAzNTMxMjIwMjcxMTA0.DCqp-w.XimlqiyQEkoF9AjkZLjUZ9Mefik"
     }
 }

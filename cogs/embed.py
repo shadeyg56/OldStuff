@@ -1,6 +1,6 @@
 import discord
-from discord.ext.commands import Bot
-from discord.ext import commands
+from ext.commands import Bot
+from ext import commands
 import datetime
 import time
 import configparser
@@ -17,7 +17,8 @@ class Embed():
         info = launcher.config()
         server = ctx.message.server
         modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-        modrole = modrole.name
+        if modrole:
+            modrole = modrole.name
         author = ctx.message.author
         return discord.utils.get(author.roles,name=modrole)
 

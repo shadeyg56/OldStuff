@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from ext import commands
 import json
 import difflib
 from .utils import launcher
@@ -32,7 +32,8 @@ class Tags():
 		info = launcher.config()
 		server = ctx.message.server
 		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-		modrole = modrole.name
+		if modrole:
+			modrole = modrole.name
 
 		if tag not in data:
 			possible_matches = difflib.get_close_matches(tag, tuple(data.keys()))
@@ -80,7 +81,8 @@ class Tags():
 		info = launcher.config()
 		server = ctx.message.server
 		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-		modrole = modrole.name
+		if modrole:
+			modrole = modrole.name
 		user = ctx.message.author
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)

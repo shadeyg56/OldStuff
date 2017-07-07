@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from ext import commands
 import datetime
 from .utils import launcher
 
@@ -18,7 +18,8 @@ class Robolog:
 		info = launcher.config()
 		server = ctx.message.server
 		modrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
-		modrole = modrole.name
+		if modrole:
+			modrole = modrole.name
 		author = ctx.message.author
 		return discord.utils.get(author.roles,name=modrole)
 

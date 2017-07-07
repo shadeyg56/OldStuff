@@ -1,8 +1,9 @@
 import discord
-from discord.ext import commands
+from ext import commands
 import json
 import string
 from .utils import launcher
+import asyncio
 
 info = launcher.bot()
 owner = info['owner']
@@ -29,7 +30,7 @@ class Setup():
 
 		if is_owner(ctx):
 			return True
-			
+
 		return ctx.message.author == ctx.message.server.owner
 
 	@commands.group(pass_context=True)
@@ -44,83 +45,142 @@ class Setup():
 		server = ctx.message.server
 		user = ctx.message.author
 		channel = ctx.message.channel
+		msg = []
 		config = json.loads(open('cogs/utils/t_config.json').read())
-		x = await self.bot.say('**Welcome to the interactive bot setup system**\n\n*Bot prefix:*')
+
+
+
+		x = await self.bot.say('*Welcome to the interactive bot setup system!*\n\n**Bot prefix:**')
 		prefix = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
 		if not prefix:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(prefix)
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Mod role:*')
-		mod_role = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
-		if not mod_role:
+		else: 
+			x = await self.bot.edit_message(x,'*Bot prefix set to:* `{}`'.format(prefix.content))
+		try:
+			await self.bot.delete_message(prefix)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+
+		x = await self.bot.edit_message(x,'**Mod role:**')
+		mod_role_m = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
+		if not mod_role_m:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(mod_role)
-		
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Admin Role:*')
-		admin_role = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
-		if not admin_role:
+		else:
+			mod_role = discord.utils.get(server.roles, name=mod_role_m.content)
+			if mod_role is None:
+				x = await self.bot.edit_message(x, 'Could not find the mod role.')
+			else:
+				x = await self.bot.edit_message(x,'*Moderator role set to:* {}'.format(mod_role.mention))
+		try:
+			await self.bot.delete_message(mod_role_m)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+		x = await self.bot.edit_message(x,'**Admin role:**')
+		admin_role_m = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
+		if not admin_role_m:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(admin_role)
-		
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Admin Channel:*')
+		else:
+			admin_role = discord.utils.get(server.roles,name=admin_role_m.content)
+			if admin_role is None:
+				x = await self.bot.edit_message(x, 'Could not find the admin role.')
+			else:
+				x = await self.bot.edit_message(x,'*Administrator role set to:* {}'.format(admin_role.mention))
+		try:
+			await self.bot.delete_message(admin_role_m)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+		x = await self.bot.edit_message(x,'**Admin Channel:**')
 		admin_chat = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
 		if not admin_chat:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(admin_chat)
-		
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Announcement Channel:*')
+		else:
+			if admin_chat.content.startswith('<#'):
+				x = await self.bot.edit_message(x,'*Administrative channel set to:* {}'.format(admin_chat.content))
+			else:
+				x = await self.bot.edit_message(x,'Incorrect format of channel passed. Must be a channel mention.')
+		try:
+			await self.bot.delete_message(admin_chat)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+
+		x = await self.bot.edit_message(x,'**Announcement channel:**')
 		a_channel = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
 		if not a_channel:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(a_channel)
-		
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Tournament Channel:*')
+		else:
+			if a_channel.content.startswith('<#'):
+				x = await self.bot.edit_message(x,'*Announcements channel set to:* {}'.format(a_channel.content))
+			else:
+				x = await self.bot.edit_message(x,'Incorrect format of channel passed. Must be a channel mention.')
+		try:
+			await self.bot.delete_message(a_channel)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+
+		x = await self.bot.edit_message(x,'**Tournament channel:**')
 		t_channel = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
 		if not t_channel:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(t_channel)
-		
-		x = await self.bot.edit_message(x,'**Welcome to the interactive bot setup system**\n\n*Mod logs channel:*')
+		else:
+			if t_channel.content.startswith('<#'):
+				x = await self.bot.edit_message(x,'*Tournament channel set to:* {}'.format(t_channel.content))
+			else:
+				x = await self.bot.edit_message(x,'Incorrect format of channel passed. Must be a channel mention.')
+		try:
+			await self.bot.delete_message(t_channel)
+			await asyncio.sleep(3)
+		except:
+			pass
+
+
+		x = await self.bot.edit_message(x,'**Mod-logs channel:**')
 		m_channel = await self.bot.wait_for_message(timeout=30,author=user,channel=channel)
 		if not m_channel:
 			x = await self.bot.edit_message(x,'*Configuration Canceled*')
 			return
-		await self.bot.delete_message(m_channel)
-		
-		
-		msg = []
-		mod_role = discord.utils.get(server.roles, name=mod_role.content)
-		if mod_role is None:
-			msg.append('Mod Role')
-			x = await self.bot.edit_message(x, 'Could not find: '+', '.join(msg).strip(', '))
 		else:
-			mod_role = mod_role.id
-
-
-		admin_role = discord.utils.get(server.roles,name=admin_role.content)
-		if admin_role is None:
-			msg.append('Admin Role')
-			x = await self.bot.edit_message(x, 'Could not find: '+', '.join(msg).strip(', '))
-		else:
-			admin_role = admin_role.id
-
-
+			if m_channel.content.startswith('<#'):
+				x = await self.bot.edit_message(x,'*Moderation-Logging channel set to:* {}'.format(m_channel.content))
+			else:
+				x = await self.bot.edit_message(x,'Incorrect format of channel passed. Must be a channel mention.')
+		try:
+			await self.bot.delete_message(m_channel)
+			await asyncio.sleep(3)
+		except:
+			pass
+		
 		
 		config[server.id] = {
 
 		"prefix": prefix.content.strip(),
-		"mod_role": mod_role,
-		"admin_role": admin_role,
+		"mod_role": mod_role.id,
+		"admin_role": admin_role.id,
 		"admin_chat": admin_chat.content.strip(string.punctuation),
 		"announcements": a_channel.content.strip(string.punctuation),
 		"tournaments": t_channel.content.strip(string.punctuation),
-		"mod_log" : m_channel.content.strip(string.punctuation)
+		"mod_log" : m_channel.content.strip(string.punctuation),
+		"name" : server.name
 
 		}
 

@@ -1,7 +1,7 @@
 import discord
 import datetime
 import time
-from discord.ext import commands
+from ext import commands
 import asyncio
 from .utils import launcher
 
@@ -17,7 +17,8 @@ class Mod():
         info = launcher.config()
         server = ctx.message.server
         modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-        modrole = modrole.name
+        if modrole:
+            modrole = modrole.name
         author = ctx.message.author
         return discord.utils.get(author.roles,name=modrole)
 

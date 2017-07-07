@@ -1,6 +1,6 @@
 import discord
-from discord.ext.commands import Bot
-from discord.ext import commands
+from ext.commands import Bot
+from ext import commands
 import datetime
 import time
 import random
@@ -158,9 +158,17 @@ class Info():
     @backup.command(pass_context=True)
     async def config(self,ctx):
         cfg = open('cogs/utils/t_config.json').read()
-        url = PythonGists.Gist(description='All current tags', content=str(cfg), name='config.txt')
+        url = PythonGists.Gist(description='Raw Config Data', content=str(cfg), name='config.txt')
         em = discord.Embed(description="[raw config data]({})".format(url),color=0x00ffff)
         await self.bot.say(embed=em)
+
+    @backup.command(pass_context=True)
+    async def levels(self,ctx):
+        cfg = open('cogs/utils/levels.json').read()
+        url = PythonGists.Gist(description='Player Level Data', content=str(cfg), name='levels.txt')
+        em = discord.Embed(description="[Player Level Data]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
+
 
 
 

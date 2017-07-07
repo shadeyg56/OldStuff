@@ -1,4 +1,4 @@
-from discord.ext import commands
+from ext import commands
 import discord
 
 def to_keycap(c):

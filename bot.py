@@ -1,12 +1,21 @@
 import discord
-from discord.ext.commands import Bot
-from discord.ext import commands
+from ext.commands import Bot
+from ext import commands
 import datetime
 import time
 import sys
 import asyncio
 from cogs.utils import launcher
 import json
+import logging
+import random
+
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 
 
 ##launcher.check()
@@ -28,7 +37,8 @@ startup_extensions = [
     'cogs.polls',
     'cogs.robolog',
     'cogs.tags',
-    'cogs.setup'
+    'cogs.setup',
+    'cogs.levels'
 ]
 
 Client = discord.Client()
@@ -61,6 +71,10 @@ async def on_ready():
     print('------------------------------------')
 
 
+
+
+
+
 def owner_only():
     return commands.check(lambda ctx: ctx.message.author == ctx.message.server.owner)
 
@@ -68,11 +82,6 @@ def is_owner():
     return commands.check(lambda ctx: ctx.message.author.id == owner)
 
 
-@bot.event
-async def on_message_edit(before,after):
-        with open('cogs/utils/log.txt','a') as log:
-            log.write(after.content + '\n')
-        
 @bot.event
 async def on_member_join(member):
     server = member.server
@@ -99,25 +108,25 @@ async def send_cmd_help(ctx):
         for page in pages:
             await bot.send_message(ctx.message.channel, page)
 
-##@bot.event
-##async def on_command_error(error, ctx):
-##   channel = ctx.message.channel
-##   if isinstance(error, commands.MissingRequiredArgument):
-##       await send_cmd_help(ctx)
-##   elif isinstance(error, commands.BadArgument):
-##       await send_cmd_help(ctx)
-##   elif isinstance(error, commands.DisabledCommand):
-##       await bot.send_message(channel, "That command is disabled.")
-##   elif isinstance(error, commands.CommandInvokeError):
-##       # A bit hacky, couldn't find a better way
-##       no_dms = "Cannot send messages to this user"
-##       is_help_cmd = ctx.command.qualified_name == "help"
-##       is_forbidden = isinstance(error.original, discord.Forbidden)
-##       if is_help_cmd and is_forbidden and error.original.text == no_dms:
-##           msg = ("I couldn't send the help message to you in DM. Either"
-##                  " you blocked me or you disabled DMs in this server.")
-##           await bot.send_message(channel, msg)
-##           return
+@bot.event
+async def on_command_error(error, ctx):
+ channel = ctx.message.channel
+ if isinstance(error, commands.MissingRequiredArgument):
+     await send_cmd_help(ctx)
+ elif isinstance(error, commands.BadArgument):
+     await send_cmd_help(ctx)
+ elif isinstance(error, commands.DisabledCommand):
+     await bot.send_message(channel, "That command is disabled.")
+ elif isinstance(error, commands.CommandInvokeError):
+     # A bit hacky, couldn't find a better way
+     no_dms = "Cannot send messages to this user"
+     is_help_cmd = ctx.command.qualified_name == "help"
+     is_forbidden = isinstance(error.original, discord.Forbidden)
+     if is_help_cmd and is_forbidden and error.original.text == no_dms:
+         msg = ("I couldn't send the help message to you in DM. Either"
+                " you blocked me or you disabled DMs in this server.")
+         await bot.send_message(channel, msg)
+         return
 
 @bot.command(pass_context=True,name='cog')
 @owner_only()
@@ -161,6 +170,11 @@ async def _leave_all_servers_(ctx):
     for server in bot.servers:
         await bot.leave_server(server)
         await bot.say('I left `{}`'.format(server.name))
+
+@bot.command(pass_context=True)
+async def servers(ctx):
+    servers = ', '.join([i.name for i in bot.servers]).strip(', ')
+    await bot.say('**Current list of servers:**\n ```bf\n{}```'.format(servers))
 
 
 
