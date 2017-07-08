@@ -6,7 +6,6 @@
 
 [<img src="https://discordapp.com/api/guilds/323349192837693440/widget.png?style=banner2">](https://discord.gg/JVw6nhD) 
 
-Simple python discord bot that has useful features! Themed around Clash Royale and made by verix.
 
 ## Requirements
 This is a *self-hosted bot* – meaning you will need to host and maintain your own instance.
