@@ -50,3 +50,4 @@ It would be greatly appreciated if you can support me by joining my discord serv
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+https://pastebin.com/qM9zWf9n
