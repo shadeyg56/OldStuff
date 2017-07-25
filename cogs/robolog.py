@@ -2,7 +2,10 @@ import discord
 from ext import commands
 import datetime
 from .utils import launcher
+from __main__ import send_cmd_help
 
+info=launcher.bot()
+owner = info['owner']
 
 class Robolog:
 	def __init__(self, bot):	
@@ -18,28 +21,22 @@ class Robolog:
 		info = launcher.config()
 		server = ctx.message.server
 		modrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
+		def is_owner(ctx):
+			return ctx.message.author.id == owner
+		if is_owner(ctx):
+			return True
 		if modrole:
 			modrole = modrole.name
 		author = ctx.message.author
 		return discord.utils.get(author.roles,name=modrole)
 
 
-	async def send_cmd_help(self,ctx):
-		if ctx.invoked_subcommand:
-			pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
-			for page in pages:
-				await self.bot.send_message(ctx.message.channel, page)
-		else:
-			pages = self.bot.formatter.format_help_for(ctx, ctx.command)
-			for page in pages:
-				await self.bot.send_message(ctx.message.channel, page)
-
 	@commands.group(pass_context=True)
 	@commands.check(mod)
 	async def log(self, ctx):
 		"""Robotics Log Commands"""
 		if ctx.invoked_subcommand is None:
-			await self.send_cmd_help(ctx)
+			await send_cmd_help(ctx)
 
 	@log.command(pass_context=True)
 	async def entry(self, ctx, *, entry : str):
@@ -54,12 +51,11 @@ class Robolog:
 
 		await self.bot.say('Added `{}` to the log'.format(entry))
 
-
 	@log.command(pass_context=True)
 	async def show(self, ctx):
 		"""Show the current log"""
 		msg = open('cogs/utils/robolog.txt').read()
-		log = '```diff\n'+'!---===[ Robotics Log ]===---!\n\n'+(''.join(msg))+'```'
+		log = '```diff\n'+'!---===[ Change Log ]===---!'+(''.join(msg))+'```'
 		await self.bot.say(log)
 
 	@log.command(name='del',pass_context=True, aliases=['delete','d'])

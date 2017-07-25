@@ -32,8 +32,7 @@ class Tags():
 		info = launcher.config()
 		server = ctx.message.server
 		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-		if modrole:
-			modrole = modrole.name
+		admin_role = discord.utils.get(user.roles, id=info[server.id]['admin_role'])
 
 		if tag not in data:
 			possible_matches = difflib.get_close_matches(tag, tuple(data.keys()))
@@ -43,7 +42,7 @@ class Tags():
 				possible_matches = ['`'+i+'`' for i in possible_matches]
 				await self.bot.say(('Tag not found. Did you mean: ' + ', '.join(possible_matches)).strip(', '))
 
-		if data[tag][1] == user or discord.utils.get(user.roles, name=modrole):
+		if data[tag][1] == user.id or discord.utils.get(user.roles, name=admin_role):
 			data[tag] = [content,user.id]
 			data = json.dumps(data, indent=2)
 			with open('cogs/utils/tags.json', 'w') as f:
@@ -80,13 +79,16 @@ class Tags():
 	async def _del(self, ctx, name : str):
 		info = launcher.config()
 		server = ctx.message.server
-		modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
-		if modrole:
-			modrole = modrole.name
 		user = ctx.message.author
+		modrole = discord.utils.get(user.roles, id=info[server.id]['mod_role'])
+		admin_role = discord.utils.get(user.roles, id=info[server.id]['admin_role'])
+		flag = None
+		if modrole or admin_role:
+			flag = True
+
 		data = open('cogs/utils/tags.json').read()
 		data = json.loads(data)
-		if user.id == data[name][1] or discord.utils.get(user.roles, name=mod_role):
+		if user.id == data[name][1] or flag:
 			del data[name]
 			await self.bot.say('Tag deleted.')
 		else:

@@ -7,7 +7,7 @@ import configparser
 from .utils import launcher
 
 
-
+owner = launcher.bot()['owner']
 
 class Embed():
     def __init__(self, bot):
@@ -16,12 +16,23 @@ class Embed():
     def mod(ctx):
         info = launcher.config()
         server = ctx.message.server
+        s_owner = server.owner
         modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        adminrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
+        author = ctx.message.author
+        def is_owner(ctx):
+            return ctx.message.author.id == owner
+        if author is s_owner:
+            return True
+        if is_owner(ctx):
+            return True
         if modrole:
             modrole = modrole.name
-        author = ctx.message.author
+        if adminrole:
+            adminrole = adminrole.name
+        if discord.utils.get(author.roles,name=adminrole):
+            return True
         return discord.utils.get(author.roles,name=modrole)
-
 
 
     @commands.command(pass_context=True,description='Do .embed to see how to use it.')
@@ -37,7 +48,12 @@ class Embed():
                 embed_values = msg.split('|')
                 for i in embed_values:
                     if i.strip().lower().startswith('ptext='):
-                        ptext = i.strip()[6:].strip()
+                        if i.strip()[6:].strip() == 'everyone':
+                            ptext = '@everyone'
+                        elif i.strip()[6:].strip() == 'here':
+                            ptext = '@here'
+                        else:
+                            ptext = i.strip()[6:].strip()
                     elif i.strip().lower().startswith('title='):
                         title = i.strip()[6:].strip()
                     elif i.strip().lower().startswith('description='):

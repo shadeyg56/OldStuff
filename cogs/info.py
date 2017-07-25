@@ -7,6 +7,8 @@ import random
 from PythonGists import PythonGists
 import json
 from .utils import launcher
+from __main__ import send_cmd_help
+
 
 info = launcher.bot()
 owner = info['owner']
@@ -66,15 +68,18 @@ class Info():
             data.set_thumbnail(url=server.icon_url)
         else:
             data.set_author(name=server.name)
+            print(data.to_dict())
 
         try:
             await self.bot.say(embed=data)
+            print('test')
+            
         except discord.HTTPException:
             await self.bot.say("I need the `Embed links` permission "
                                "to send this")
 
         
-    @commands.command(pass_context=True,aliases=['ui','info','user'],description='See user-info of someone.')
+    @commands.command(pass_context=True,aliases=['ui','user'],description='See user-info of someone.')
     async def userinfo(self,ctx, user: discord.Member = None):
         '''See information about a user or yourself.'''
         server = ctx.message.server
@@ -125,28 +130,69 @@ class Info():
         em.set_image(url=avi)
         await self.bot.say(embed=em)
 
-    async def send_cmd_help(self,ctx):
-        if ctx.invoked_subcommand:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
-        else:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.command)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
-
     def owner_only():
         return commands.check(lambda ctx: ctx.message.author == ctx.message.server.owner)
 
     def is_owner():
         return commands.check(lambda ctx: ctx.message.author.id == owner)
 
+    @commands.command(pass_context=True)
+    async def info(self, ctx, *, arg : str = None):
+        with open('cogs/utils/t_config.json') as f:
+            data = json.loads(f.read())
+        if arg is None:
+            uptime = (datetime.datetime.now() - self.bot.uptime)
+            hours, rem = divmod(int(uptime.total_seconds()), 3600)
+            minutes, seconds = divmod(rem, 60)
+            days, hours = divmod(hours, 24)
+            if days:
+                time_ = '%s days, %s hours, %s minutes, and %s seconds' % (days, hours, minutes, seconds)
+            else:
+                time_ = '%s hours, %s minutes, and %s seconds' % (hours, minutes, seconds)
+            servers = len(self.bot.servers)
+            version = data['bot']['version']
+            library = 'discord.py'
+            creator = await self.bot.get_user_info(owner)
+            users = 0
+            for server in self.bot.servers:
+                users += len(server.members)
+            invite = '[bot.discord.io/knightbot](https://bot.discord.io/knightbot)'
+            discord_ = '[discord.io/knightbot](https://discord.io/knightbot)'
+            github = '[verixx/knightbot](https://github.com/verixx/knightbot)'
+            time = ctx.message.timestamp
+            emb = discord.Embed(colour=0x00FFFF)
+            emb.set_author(name='KnightBot', icon_url=self.bot.user.avatar_url)
+            emb.add_field(name='Version',value=version)
+            emb.add_field(name='Library',value=library)
+            emb.add_field(name='Creator',value=creator)
+            emb.add_field(name='Servers',value=servers)
+            emb.add_field(name='Users',value=users)
+            emb.add_field(name='Invite',value=invite)
+            emb.add_field(name='Github',value=github)
+            emb.add_field(name='Discord',value=discord_)
+            emb.add_field(name='Uptime',value=time_)
+            emb.set_thumbnail(url=self.bot.user.avatar_url)
+            await self.bot.say(embed=emb)
+        elif ctx.message.author.id == data['bot']['owner']:
+            try:          
+                v = arg.split('=')
+                if v[0].lower().strip() == 'version':
+                    version = v[1].strip()
+                    data['bot']['version'] = str(version)
+                    await self.bot.say('Set bot version to `{}`'.format(version))
+                    with open('cogs/utils/t_config.json', "w") as f:
+                        f.write(json.dumps(data, indent=4, sort_keys=True))
+            except:
+                await self.bot.say('Incorrect command passed.')
+
+
+
     @commands.group(pass_context=True)
     @is_owner()
     async def backup(self,ctx):
         """Backup raw data for storage"""
         if ctx.invoked_subcommand is None:
-            await self.send_cmd_help(ctx)
+            await send_cmd_help(ctx)
 
     @backup.command(pass_context=True)
     async def tags(self,ctx):
@@ -169,6 +215,12 @@ class Info():
         em = discord.Embed(description="[Player Level Data]({})".format(url),color=0x00ffff)
         await self.bot.say(embed=em)
 
+    @backup.command(pass_context=True)
+    async def decks(self,ctx):
+        cfg = open('cogs/utils/decks.json').read()
+        url = PythonGists.Gist(description='Player Decks', content=str(cfg), name='decks.txt')
+        em = discord.Embed(description="[Deck configs]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
 
 
 

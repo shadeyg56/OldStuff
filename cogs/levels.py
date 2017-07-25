@@ -55,15 +55,19 @@ class Levels():
 		return [lvl,xp,nxt,rank,leng,flag]
 
 	async def on_message(self,message):
-	    user = message.author
-	    channel = message.channel
-	    if user == self.bot.user:
-	        return
-	    if user.bot:
-	    	return
-	    x = self.level(user,channel)
-	    if x[5] is True:
-	    	await self.bot.send_message(channel,'Well played! **{}** has just advanced to level **{}**.'.format(user.name, x[0]))
+		with open('cogs/utils/t_config.json') as f:
+			data = json.loads(f.read())
+		server = message.server
+		if data[server.id]["levels"] is True:	
+		    user = message.author
+		    channel = message.channel
+		    if user == self.bot.user:
+		        return
+		    if user.bot:
+		    	return
+		    x = self.level(user,channel)
+		    if x[5] is True:
+		    	await self.bot.send_message(channel,'Well played! **{}** has just advanced to level **{}**.'.format(user.name, x[0]))
 
 	@commands.command(pass_context=True)
 	async def rank(self,ctx, user : discord.Member = None):

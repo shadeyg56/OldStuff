@@ -16,10 +16,22 @@ class Mod():
     def mod(ctx):
         info = launcher.config()
         server = ctx.message.server
+        s_owner = server.owner
         modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        adminrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
+        author = ctx.message.author
+        def is_owner(ctx):
+            return ctx.message.author.id == owner
+        if author is s_owner:
+            return True
+        if is_owner(ctx):
+            return True
         if modrole:
             modrole = modrole.name
-        author = ctx.message.author
+        if adminrole:
+            adminrole = adminrole.name
+        if discord.utils.get(author.roles,name=adminrole):
+            return True
         return discord.utils.get(author.roles,name=modrole)
 
     def server_cfg(self,ctx):
@@ -213,9 +225,9 @@ class Mod():
     @commands.check(mod)
     async def warn(self,ctx, member : discord.Member=None,*,reason=None):
         '''Warn someone in the server.'''
+        channel = self.server_cfg(ctx)
         mod = ctx.message.author
         time = ctx.message.timestamp
-        channel = discord.Object(id=325718146243624970)
         avi = ''
         if member.avatar_url:
             avi = member.avatar_url

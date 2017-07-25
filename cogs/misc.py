@@ -133,45 +133,41 @@ class Misc():
 #--------------------------------------------------------------------------------------
 
 
-    @commands.group(name='self',pass_context=True,description='Selfrole commands for set roles')
-    async def self_(self,ctx):
+    @commands.group(name='self',pass_context=True,invoke_without_subcommand=True)
+    async def self_(self,ctx,role):
         """Selfrole commands"""
         if ctx.invoked_subcommand is None:
-            await self.send_cmd_help(ctx)
+            user = ctx.message.author
+            server = ctx.message.server
+            channel = ctx.message.channel
+            frole = role.lower().strip()
+            roles_ = [i.lower() for i in self.selfroles]
+            sroles = {}
+            for i in server.roles:
+                x = i.name.lower()
+                for role in roles_:
+                    if x == role:
+                        sroles[x] = i
+            for r in sroles:
+                if r.startswith(frole):
+                    frole = sroles[r]
+                    break
+            if frole is not None:            
+                if frole not in user.roles:
+                    await self.bot.add_roles(user,frole)
+                    await self.bot.say('You now have the **{}** role.'.format(frole.name))
+                else:
+                    await self.bot.remove_roles(user,frole)
+                    await self.bot.say('Removed the **{}** role.'.format(frole.name)) 
+            else:
+                await self.bot.say('I cant find that role.')
 
     @self_.command(pass_context=True)
-    async def list(self,ctx):
+    async def roles(self,ctx):
         """Current list of allowable selfroles."""
         await self.bot.say('Current list of self roles: {}'.format(', '.join(self.selfroles)))
-            
-    @self_.command(pass_context=True)
-    async def role(self,ctx,role):
-        """Give yourself a role."""
-        user = ctx.message.author
-        server = ctx.message.server
-        channel = ctx.message.channel
-        frole = role.lower().strip()
-        roles_ = [i.lower() for i in self.selfroles]
-        sroles = {}
-        for i in server.roles:
-            x = i.name.lower()
-            for role in roles_:
-                if x == role:
-                    sroles[x] = i
-        for r in sroles:
-            if r.startswith(frole):
-                frole = sroles[r]
-                break
-        if frole is not None:            
-            if frole not in user.roles:
-                await self.bot.add_roles(user,frole)
-                await self.bot.say('You now have the **{}** role.'.format(frole.name))
-            else:
-                await self.bot.remove_roles(user,frole)
-                await self.bot.say('Removed the **{}** role.'.format(frole.name)) 
-        else:
-            await self.bot.say('I cant find that role.')
 
+        
     @commands.command(pass_context=True, aliases=['8ball'])
     async def ball8(self, ctx, *, msg: str):
         """Let the 8ball decide your fate."""
@@ -245,6 +241,14 @@ class Misc():
             await client.send_message(message.channel, 'You are right!')
         else:
             await client.send_message(message.channel, 'Sorry. It is actually {}.'.format(answer))
+
+             
+
+
+
+
+
+
 
     
 def setup(bot):

@@ -6,6 +6,7 @@ import datetime
 import time
 import configparser
 from .utils import launcher
+from __main__ import send_cmd_help
 
 
 class Tournament():
@@ -19,26 +20,26 @@ class Tournament():
 
     async def embtourney(self,user,name,pword,gems,host):
 
-        images = {'100':['https://i.imgur.com/5MY1h9r.png',0xdf830e],
-                  '500':['https://i.imgur.com/YtQp90c.png',0xdfdf0e],
-                  '2000':['https://i.imgur.com/f1LOr4q.png',0x16db36],
-                  '10000':['https://i.imgur.com/vKQV78t.png',0x8416db]}
-        image = images[gems][0]
+        images = {'100':['https://i.imgur.com/5MY1h9r.png',0x12d6d6],
+                  '500':['https://i.imgur.com/YtQp90c.png',0x21b86f],
+                  '2000':['https://i.imgur.com/f1LOr4q.png',0xe49d1e],
+                  '10000':['https://i.imgur.com/vKQV78t.png',0x8830b1]}
+
         color = images[gems][1]
         
-        desc = '```mkd\n> THE TOURNAMENT WILL START SOON.\n> WIN THE THE TOURNAMENT TO GET A ROLE.```'
-        name = '```prolog\n'+name+'```'
-        pword = '```fix\n'+pword+'```'
-        gems = '```py\n'+gems+'```'
-        host = '```css\n'+host+'```'
+        name = '```brainfuck\n'+name+'```'
+        pword = '```brainfuck\n'+pword+'```'
+        gems = '```brainfuck\n'+gems+'```'
+        host = '```brainfuck\n'+host+'```'
         
-        emb = discord.Embed(color=color,description=desc)
+        emb = discord.Embed(color=color)
         emb.add_field(name='Name',value=name)
         emb.add_field(name='Password',value=pword)
         emb.add_field(name='Gems',value=gems)
         emb.add_field(name='Host',value=host)
-        emb.set_author(name='SERVER TOURNAMENT',icon_url=user.avatar_url)
-        emb.set_image(url=image)
+        emb.set_author(name='Server Tournament!',icon_url=user.avatar_url)
+        emb.set_thumbnail(url='https://vignette4.wikia.nocookie.net/clashroyale/images/a/a7/TournamentIcon.png')
+        emb.set_footer(text='Submitted by {}'.format(user.name))
         
         return emb
 
@@ -60,17 +61,7 @@ class Tournament():
         emb.set_thumbnail(url='http://vignette4.wikia.nocookie.net/clashroyale/images/a/a7/TournamentIcon.png')
         emb.set_footer(text='User ID: '+str(user.id))
         return emb
-
-    async def send_cmd_help(self,ctx):
-        if ctx.invoked_subcommand:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
-        else:
-            pages = self.bot.formatter.format_help_for(ctx, ctx.command)
-            for page in pages:
-                await self.bot.send_message(ctx.message.channel, page)
-                
+       
     
     def server_cfg(self,ctx):
         server = ctx.message.server
@@ -87,7 +78,7 @@ class Tournament():
     async def tournament(self,ctx):
         '''Exclusive Clash Royale tournament commands.'''
         if ctx.invoked_subcommand is None:
-            await self.send_cmd_help(ctx)
+            await send_cmd_help(ctx)
 
     @tournament.command(pass_context=True,description = 'Request to post a tourney. ')
     async def submit(self,ctx):
@@ -176,19 +167,32 @@ class Tournament():
     def mod(ctx):
         info = launcher.config()
         server = ctx.message.server
+        s_owner = server.owner
         modrole = discord.utils.get(server.roles, id=info[server.id]['mod_role'])
+        adminrole = discord.utils.get(server.roles, id=info[server.id]['admin_role'])
+        author = ctx.message.author
+        def is_owner(ctx):
+            return ctx.message.author.id == owner
+        if author is s_owner:
+            return True
+        if is_owner(ctx):
+            return True
         if modrole:
             modrole = modrole.name
-        author = ctx.message.author
+        if adminrole:
+            adminrole = adminrole.name
+        if discord.utils.get(author.roles,name=adminrole):
+            return True
         return discord.utils.get(author.roles,name=modrole)
-
 
     @tournament.command(pass_context=True,description='.tournament post name=name | pass=pass | gems=gems | host=host | tag=tag')
     @commands.check(mod)
-    async def post(self,ctx,*,msg : str):
+    async def post(self,ctx,*,msg : str = None):
         '''Lets moderators post tournaments.'''
+        info = self.server_cfg(ctx)
         user = ctx.message.author
         server = ctx.message.server
+        tournaments = info['t']
         announce = discord.utils.get(server.channels,name=tournaments)
         if msg:
             name = pword = gems = host = tag = None
