@@ -11,8 +11,10 @@
 This is a *self-hosted bot* – meaning you will need to host and maintain your own instance.
 You need the following to run the bot:
 ```py
->>> python 3.5
->>> discord.py
+discord.py
+requests
+PythonGists
+BeatifulSoup4
 ```
 ## Setup
 Open a terminal in the directory of the bots location and type
