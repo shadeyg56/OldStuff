@@ -39,14 +39,3 @@ The default set of modules includes:
 It would be greatly appreciated if you can support me by joining my discord server and socialising with me! Join it to stay up to date on updates and announcements. Stay for a good time! Join here: https://discord.io/kbot
 
 
-### Credits
-
-> Credits to Ace for making the amazing KnightBot logo.
-
-> Credits to Rapptz for the discord.py library
-
-> Credits to the Mod team over at our server
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-https://pastebin.com/qM9zWf9n
