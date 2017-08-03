@@ -234,7 +234,9 @@ class Setup():
 			
 		elif arg == 'raw':
 			config = json.dumps(config, indent=4, sort_keys=True)
-			await self.bot.say('**Raw json data for your server:**\n```json\n{}```'.format(config))
+			await self.bot.say('**Raw json data for your server:**')
+			for page in self.paginate(config, 1900):
+				await self.bot.say('```json\n{}```'.format(page))
 		else:
 			pass
 
@@ -422,12 +424,12 @@ class Setup():
 			else:
 				data[server.id]["admin_role"] = None
 			data[server.id]["admin_chat"] = None
-			data[server.id]["prefix"] = '.'
+			data[server.id]["prefix"] = '!'
 			data[server.id]["announcements"] = None
 			data[server.id]["tournaments"] = None
 			data[server.id]["mod_log"] = None
 			data[server.id]["!name"] = server.name
-			data[server.id]["levels"] = True
+			data[server.id]["levels"] = False
 			data[server.id]["autorole"] = None
 			data[server.id]["selfroles"] = []
 			data[server.id]["aliases"] = {}
@@ -443,14 +445,32 @@ class Setup():
 
 			"msg": '{0.name} has just left the server.',
 			"channel":"default",
-			"status": True
+			"status": False
 
 			}
 
 			data = json.dumps(data, indent=4, sort_keys=True)
 
 			with open('cogs/utils/t_config.json', "w") as f:
-				f.write(data)	
+				f.write(data)
+
+	def paginate(self, sequence, num):
+	    count = 1
+	    rows = list()
+	    cols = list()
+	    for item in sequence:
+	        if count == num:
+	            cols.append(item)
+	            rows.append(cols)
+	            cols = list()
+	            count = 1
+	        else:
+	            cols.append(item)
+	            count += 1
+	    if count > 0:
+	        rows.append(cols)
+	    for row in rows:
+	    	yield ''.join(row)
 
 
 

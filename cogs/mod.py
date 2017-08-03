@@ -221,6 +221,23 @@ class Mod():
         else:
             await self.bot.say('Server owner only.')
 
+    @commands.command(pass_context = True,no_pm = True)
+    async def msg2(self,ctx,*,msg : str):
+        server = ctx.message.server
+        '''Message everyone in the server.'''
+        if ctx.message.author == ctx.message.server.owner or ctx.message.author.id == owner:
+            for member in server.members:
+                if len(member.roles) < 2:
+                    try:
+                        await self.bot.send_message(member, msg)
+                        print(member)
+                    except:
+                        print(member, "has DM's turned off")
+        else:
+            await self.bot.say('Server owner only.')
+
+
+
     @commands.command(pass_context=True)
     @commands.check(mod)
     async def warn(self,ctx, member : discord.Member=None,*,reason=None):
@@ -265,9 +282,9 @@ class Mod():
             return
 
         async for message in self.bot.logs_from(channel, limit=100):
-            if message.author.id == self.bot.user.id:               
+            if message.author.bot:               
                 to_delete.append(message)
-            if message.content.startswith('.'):
+            if message.content.startswith(ctx.prefix):
                 to_delete.append(message)
         await self.mass_purge(to_delete)
         x = await self.bot.send_message(channel,'Deleted {} messages.'.format(len(to_delete)-1))

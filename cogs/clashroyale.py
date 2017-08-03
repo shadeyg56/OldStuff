@@ -268,6 +268,20 @@ class ClashRoyale:
             if stat == 'Player Not Found':
                 status = await self.async_refresh('http://statsroyale.com/profile/'+tag+'/refresh')
                 await self.bot.say('Player Not Found. Attempting to add to System. Success: '+str(status['success']))
+                data = self.parse_data(tag,stat)
+                clan_tag = data['clan_tag']
+                data_c = await self.getClan(clan_tag)
+                if data_c == 'Clan Not Found':
+                    status = await self.async_refresh('http://statsroyale.com/clan/'+clan_tag+'/refresh')
+                    await self.bot.say('Clan Not Found. Attempting to add to System. Success: '+str(status['success']))
+                else:
+                    data['clan_data'] = data_c
+                    data['chests'] = await self.getChestCycle(tag)
+                    s_data[user.id] = data
+
+                em = self.em_format(data,user.id)
+
+                await self.bot.say('Successfully saved your data.')
             else:
                 data = self.parse_data(tag,stat)
                 clan_tag = data['clan_tag']

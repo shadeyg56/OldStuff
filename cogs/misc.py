@@ -80,7 +80,6 @@ class Misc():
         ping = now - msgtime
         pong = discord.Embed(title='Pong! Response Time:', description=str(ping.microseconds / 1000.0) + ' ms',
                              color=0x00ffff)
-        pong.set_thumbnail(url='https://i.imgur.com/PWw08sX.png')
         await self.bot.send_message(ctx.message.channel, embed=pong)
 
 #--------------------------------------------------------------------------------------
@@ -188,7 +187,7 @@ class Misc():
     @commands.command(pass_context=True)
     async def invite(self, ctx):
         '''Returns the OAUTH invite linke'''
-        await self.bot.say('https://discordapp.com/oauth2/authorize?client_id=326703531220271104&scope=bot&permissions=8')
+        await self.bot.say('**Invite Link:**\n<https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=470147287>'.format(self.bot.user.id))
 
 
     @commands.command(pass_context=True)

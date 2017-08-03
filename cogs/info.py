@@ -40,7 +40,8 @@ class Info():
         server = ctx.message.server
         online = len([m.status for m in server.members
                       if m.status == discord.Status.online or
-                      m.status == discord.Status.idle])
+                      m.status == discord.Status.idle or
+                      m.status == discord.Status.dnd])
         total_users = len(server.members)
         text_channels = len([x for x in server.channels
                              if x.type == discord.ChannelType.text])
@@ -157,20 +158,21 @@ class Info():
             for server in self.bot.servers:
                 users += len(server.members)
             invite = '[bot.discord.io/knightbot](https://bot.discord.io/knightbot)'
-            discord_ = '[discord.io/knightbot](https://discord.io/knightbot)'
+            discord_ = '[discord.io/brawlstars](https://discord.gg/c9NUu2W)'
             github = '[verixx/knightbot](https://github.com/verixx/knightbot)'
             time = ctx.message.timestamp
             emb = discord.Embed(colour=0x00FFFF)
-            emb.set_author(name='KnightBot', icon_url=self.bot.user.avatar_url)
+            emb.set_author(name='SpikeBot', icon_url=self.bot.user.avatar_url)
             emb.add_field(name='Version',value=version)
             emb.add_field(name='Library',value=library)
             emb.add_field(name='Creator',value=creator)
             emb.add_field(name='Servers',value=servers)
             emb.add_field(name='Users',value=users)
-            emb.add_field(name='Invite',value=invite)
+            emb.add_field(name='Invite',value='Private Bot')
             emb.add_field(name='Github',value=github)
             emb.add_field(name='Discord',value=discord_)
             emb.add_field(name='Uptime',value=time_)
+            emb.set_footer(text="ID: {} | Powered by KnightBot".format(self.bot.user.id))
             emb.set_thumbnail(url=self.bot.user.avatar_url)
             await self.bot.say(embed=emb)
         elif ctx.message.author.id == data['bot']['owner']:
@@ -220,6 +222,20 @@ class Info():
         cfg = open('cogs/utils/decks.json').read()
         url = PythonGists.Gist(description='Player Decks', content=str(cfg), name='decks.txt')
         em = discord.Embed(description="[Deck configs]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
+
+    @backup.command(pass_context=True)
+    async def registrations(self,ctx):
+        cfg = open('cogs/utils/registrations.txt').read()
+        url = PythonGists.Gist(description='Server Event Registrations', content=str(cfg), name='registrations.txt')
+        em = discord.Embed(description="[Server Event Registrations]({})".format(url),color=0x00ffff)
+        await self.bot.say(embed=em)
+
+    @backup.command(pass_context=True)
+    async def stats(self,ctx):
+        cfg = open('cogs/utils/stats.json').read()
+        url = PythonGists.Gist(description='Stats data', content=str(cfg), name='stats.json')
+        em = discord.Embed(description="[Stats Backup]({})".format(url),color=0x00ffff)
         await self.bot.say(embed=em)
 
 

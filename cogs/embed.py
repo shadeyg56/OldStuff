@@ -36,7 +36,6 @@ class Embed():
 
 
     @commands.command(pass_context=True,description='Do .embed to see how to use it.')
-    @commands.check(mod)
     async def embed(self, ctx, *, msg: str = None):
         '''Embed complex rich embeds as the bot.'''
         try:

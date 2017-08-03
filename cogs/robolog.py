@@ -3,6 +3,7 @@ from ext import commands
 import datetime
 from .utils import launcher
 from __main__ import send_cmd_help
+from .utils.paginator import Pages
 
 info=launcher.bot()
 owner = info['owner']
@@ -72,12 +73,14 @@ class Robolog:
 		else:
 			await self.bot.say('Successfully removed `{}` from the log'.format(log[len(log) - index][1:].strip()))
 			del log[len(log) - index]
-			
+			ahel
 
 		log = ''.join(log)
 
 		with open('cogs/utils/robolog.txt', 'w') as f:
 			f.write(log)
+
+	
 
 
 def setup(bot):
