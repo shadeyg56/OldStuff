@@ -26,13 +26,13 @@ On first start the launcher will run and you will need to input data. After that
 ## Commands
 
 The default set of modules includes:
-* Moderation features
-* Fun misc commands
-* Complex Embed commands
-* Text tagging system
-* Work logging system
+* Moderation commands
+* Fun/Misc commands
+* Utility commands
+* Tagging of text
 * Tournament submission system
 * Clash Royale Stats commands
+* Brawl Stars Stats commands
 
 ## Support Me
 
