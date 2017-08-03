@@ -1,4 +1,4 @@
-![intro](https://i.imgur.com/MI9tq0B.png)
+![intro](https://i.imgur.com/hEM7Tuf.png)
 # SpikeBot
 #### *Moderation, fun, utility, stats commands and much more!*
 <img src='https://img.shields.io/badge/build-passing-brightgreen.svg'> [<img src="https://img.shields.io/badge/discord-py-orange.svg">](https://github.com/Rapptz/discord.py) [<img src='https://img.shields.io/badge/python-3.5-brightgreen.svg'>](https://python.org)
