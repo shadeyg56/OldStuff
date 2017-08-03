@@ -8,7 +8,7 @@
 
 
 ## Requirements
-This is a *self-hosted bot* – meaning you will need to host and maintain your own instance.
+This repository is for development only, I would rather you invite the official bot to your server than run your own instance.
 You need the following to run the bot:
 ```py
 discord.py
