@@ -20,6 +20,11 @@ class Misc():
                      'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again',
                      'Don\'t count on it', 'My reply is no', 'My sources say no', 'Outlook not so good',
                      'Very doubtful']
+        self.sayerrs = ["Not so fast cheeky boi xD", "Ayy lmao it doesn't work :D",
+                        "LOL fail you better delete that now before people get mad",
+                        "How about I tag you instead", "That would be abusing admin perms.",
+                        "Attention: You have been muted for attempting to troll people with me!"]
+        # can't think of more at the moment ^
         self.selfroles = ['Subscriber','Hype']
 
     async def send_cmd_help(self,ctx):
@@ -51,10 +56,12 @@ class Misc():
     async def say(self,*, message: str):
         '''Say something as the bot.'''
         if '@everyone' in message:
-            await self.bot.say('Not so fast cheeky boi xdd')
+            await self.bot.say(random.choice(self.sayerrs))
         elif '@here' in message:
-            await self.bot.say('Ayy lmao, it doesnt work.')
-        else:       
+            await self.bot.say(random.choice(self.sayerrs))
+        elif "<@" in message:
+            await self.bot.say("Say it to their face!")
+        else:
             await self.bot.say(message)
 
             
@@ -93,7 +100,7 @@ class Misc():
         if not hack:
             hack = 'discord'
         else:
-            hack = hack.replace(' ','_')
+            hack = hack.replace(' ','-')
         channel = ctx.message.channel
         x = await self.bot.send_message(channel, '``[▓▓▓                    ] / {}-virus.exe Packing files.``'.format(hack))
         await asyncio.sleep(1.5)
