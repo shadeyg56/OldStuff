@@ -71,6 +71,7 @@ async def on_ready():
     print('------------------------------------')
     print("Name: {}".format(bot.user.name))
     print('Author: verix')
+    print("umbr was here") #remove this if you want
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
@@ -284,7 +285,7 @@ async def register(ctx):
     
     if str(user) in data:
         await bot.delete_message(ctx.message)
-        await bot.send_message(user, 'You cant register more than once')
+        await bot.send_message(user, "You can't register more than once.")
         return
     with open('cogs/utils/registrations.txt','a') as f:
         f.write(str(user)+'\n')
