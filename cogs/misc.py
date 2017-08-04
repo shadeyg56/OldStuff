@@ -41,9 +41,9 @@ class Misc():
     async def embedsay(self,ctx, *, message: str = None):
         '''Embed something as the bot.'''
         if '@everyone' in message:
-            await self.bot.say(self.sayerrs[random.randint(0, 5)])
+            await self.bot.say(random.choice(self.sayerrs))
         elif '@here' in message:
-            await self.bot.say(self.sayerrs[random.randint(0, 5)])
+            await self.bot.say(random.choice(self.sayerrs))
         elif "@" in message:
             await self.bot.say("Say it to their face!")
         else:
@@ -63,9 +63,9 @@ class Misc():
     async def say(self,*, message: str):
         '''Say something as the bot.'''
         if '@everyone' in message:
-            await self.bot.say(self.sayerrs[random.randint(0, 5)])
+            await self.bot.say(random.choice(self.sayerrs))
         elif '@here' in message:
-            await self.bot.say(self.sayerrs[random.randint(0, 5)])
+            await self.bot.say(random.choice(self.sayerrs))
         elif "@" in message:
             await self.bot.say("Say it to their face!")
         else:
