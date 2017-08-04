@@ -40,23 +40,16 @@ class Misc():
     @commands.command(pass_context=True)
     async def embedsay(self,ctx, *, message: str = None):
         '''Embed something as the bot.'''
-        if '@everyone' in message:
-            await self.bot.say(random.choice(self.sayerrs))
-        elif '@here' in message:
-            await self.bot.say(random.choice(self.sayerrs))
-        elif "@" in message:
-            await self.bot.say("Say it to their face!")
+        color = ("#%06x" % random.randint(8, 0xFFFFFF))
+        color = int(color[1:],16)
+        color = discord.Color(value=color)
+        if message:
+            msg = ctx.message
+            emb = discord.Embed(color=color,description=message)
+            await self.bot.delete_message(msg)
+            await self.bot.say(embed=emb)
         else:
-            color = ("#%06x" % random.randint(8, 0xFFFFFF))
-            color = int(color[1:],16)
-            color = discord.Color(value=color)
-            if message:
-                msg = ctx.message
-                emb = discord.Embed(color=color,description=message)
-                await self.bot.delete_message(msg)
-                await self.bot.say(embed=emb)
-            else:
-                await self.bot.say('Usage: `.embedsay [message]`')
+            await self.bot.say('Usage: `.embedsay [message]`')
 
 
     @commands.command()
@@ -66,7 +59,7 @@ class Misc():
             await self.bot.say(random.choice(self.sayerrs))
         elif '@here' in message:
             await self.bot.say(random.choice(self.sayerrs))
-        elif "@" in message:
+        elif "<@" in message:
             await self.bot.say("Say it to their face!")
         else:
             await self.bot.say(message)
