@@ -14,10 +14,16 @@ class Mod():
     def __init__(self, bot):
         self.bot = bot
         # This should work, haven't tested it because I don't have the bot
-        self.kickmsgs = ["Done. That felt good.", "No, Mr. Bond. I expect you to die.", "Let's hope he's not back in 5 minutes.",
-                         "EXTERMINATE. EXXTTTEEEERRRRRMMMMMMIIIIIIINNNNNNNNAAAAAAAAATTTTTTTTTTEEEEEEEEEEE", "Are you sure about that?",
+        self.kickmsgs = ["Done. That felt good.", 
+                         "No, Mr. Bond. I expect you to die.", 
+                         "Let's hope he's not back in 5 minutes.",
+                         "Are you sure about that?",
                          "Enough chaos."]
-        self.kickerrs = ["Something is wrong...", "It doesn't work!", "Goodbye- wait, he's still here!", "NEED. MORE. POWWWWWWAH"]
+        
+        self.kickerrs = ["Something is wrong...", 
+                         "It doesn't work!", 
+                         "Goodbye- wait, he's still here!", 
+                         "NEED. MORE. POWWWWWWAH"]
         # Actually for kick, ban, and softban ^
         # Unban messages
         self.unbanmsgs = ["Forgiveness is key.", "I wonder how much he's grown since then?", "Ahhhh. The old memories.",
