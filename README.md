@@ -6,10 +6,29 @@
 
 [<img src="https://discordapp.com/api/guilds/338500407120756737/widget.png?style=banner2">](https://discord.gg/JVw6nhD) 
 
+## Windows Installation
+Download python. During setup, make sure you added it to %PATH% (the second option).
+
+Download this repository by clicking the green button in the top right, then "Download ZIP".
+
+Unzip the file.
+
+## Linux Installation
+Download python, whether you want to use yum, or apt-get, or whatever your favorite package manager is. You can find the info through google, and since each version of Linux is slightly different, I'm not going to go into detail.
+
+Download git. Again, use whatever package manager you want.
+
+Clone the repository: 
+
+```
+git clone https://github.com/verixx/SpikeBot
+```
+
 
 ## Requirements
 This repository is for development only, I would rather you invite the official bot to your server than run your own instance.
-You need the following to run the bot:
+
+You need to install the following with pip install to run the bot:
 ```py
 discord.py
 requests
