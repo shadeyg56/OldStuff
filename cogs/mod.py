@@ -4,6 +4,7 @@ import time
 from ext import commands
 import asyncio
 from .utils import launcher
+import random
 
 info = launcher.bot()
 token = info['token']
@@ -12,6 +13,16 @@ owner = info['owner']
 class Mod():
     def __init__(self, bot):
         self.bot = bot
+        # This should work, haven't tested it because I don't have the bot
+        self.kickmsgs = ["Done. That felt good.", "No, Mr. Bond. I expect you to die.", "Let's hope he's not back in 5 minutes.",
+                         "EXTERMINATE. EXXTTTEEEERRRRRMMMMMMIIIIIIINNNNNNNNAAAAAAAAATTTTTTTTTTEEEEEEEEEEE", "Are you sure about that?",
+                         "Enough chaos."]
+        self.kickerrs = ["Something is wrong...", "It doesn't work!", "Goodbye- wait, he's still here!", "NEED. MORE. POWWWWWWAH"]
+        # Actually for kick, ban, and softban ^
+        # Unban messages
+        self.unbanmsgs = ["Forgiveness is key.", "I wonder how much he's grown since then?", "Ahhhh. The old memories.",
+                          "Really? I thought that'd never happen!"]
+        self.unbanerrs = ["Something is wrong...", "It doesn't work!"]
 
     def mod(ctx):
         info = launcher.config()
@@ -89,13 +100,13 @@ class Mod():
         try:
             if not discord.utils.get(member.roles, name='Mod'):
                 await self.bot.kick(member)
-                await self.bot.say('Done. That felt good.')
+                await self.bot.say(random.choice(self.kickmsgs))
                 await self.modlog(ctx,'Kick',member,mod,time,reason)
             else:
-                await self.bot.say('I cant kick a Mod.')
+                await self.bot.say(random.choice(self.kickerrs))
 
         except discord.Forbidden:
-            await self.bot.say("Bot ain't got the perms lad.")
+            await self.bot.say(random.choice(self.kickerrs))
 
 
     @commands.command(pass_context=True)
@@ -107,13 +118,13 @@ class Mod():
         try:
             if not discord.utils.get(member.roles, name='Mod'):
                 await self.bot.ban(member)
-                await self.bot.say('Done. Enough Chaos.')
+                await self.bot.say(random.choice(self.kickmsgs))
                 await self.modlog(ctx,'Ban',member,mod,time,reason)
             else:
-                await self.bot.say('Dont try.')
+                await self.bot.say(random.choice(self.kickerrs))
 
         except discord.Forbidden:
-            await self.bot.say("Bot ain't got the perms lad.")
+            await self.bot.say(random.choice(self.kickerrs))
 
     @commands.command(pass_context=True)
     @commands.check(mod)
@@ -125,13 +136,13 @@ class Mod():
             if not discord.utils.get(member.roles, name='Mod'):
                 await self.bot.ban(member)
                 await self.bot.unban(member.server,member)
-                await self.bot.say('Done. Eleeectronss.')
+                await self.bot.say(random.choice(self.kickmsgs))
                 await self.modlog(ctx,'Soft-Ban',member,mod,time,reason)
             else:
-                await self.bot.say('Dont try.')
+                await self.bot.say(random.choice(self.kickerrs))
 
         except discord.Forbidden:
-            await self.bot.say("Bot ain't got the perms lad.")
+            await self.bot.say(random.choice(self.kickerrs))
 
     @commands.command(pass_context=True)
     @commands.check(mod)
@@ -143,10 +154,10 @@ class Mod():
         time = ctx.message.timestamp
         try:
             await self.bot.unban(server, mem)
-            await self.bot.say('Done. Eleeectronss.')
+            await self.bot.say(random.choice(self.unbanmsgs))
             await self.modlog(ctx,'Unban',member,mod,time,reason)
         except discord.Forbidden:
-            await self.bot.say("Bot ain't got the perms lad.")
+            await self.bot.say("random.choice(self.unbanmsgs)")
 
     @commands.command(pass_context=True)
     @commands.check(mod)
@@ -168,7 +179,7 @@ class Mod():
                 await self.bot.remove_roles(member,role)
                 await self.bot.say('{0.mention} can now speak.'.format(member))
         else:
-            await self.bot.say('You cant mute mods.')
+            await self.bot.say("You can't mute mods.")
 
     @commands.command(pass_context=True)
     @commands.check(mod)
@@ -210,6 +221,7 @@ class Mod():
     @commands.command(pass_context = True,no_pm = True)
     async def msg(self,ctx,*,msg : str):
         server = ctx.message.server
+        members_messaged = 0
         '''Message everyone in the server.'''
         if ctx.message.author == ctx.message.server.owner or ctx.message.author.id == owner:
             for member in server.members:
@@ -218,12 +230,15 @@ class Mod():
                     print(member)
                 except:
                     print(member, "has DM's turned off")
+                members_messaged++ # I know this works in java, not clear with python, just want to add 1 to members_messaged each time the loop is run            
+            await self.bot.say("Done. " + members_messaged + " members were DMed. (Prepare to have some angry people on your heels...)")
         else:
             await self.bot.say('Server owner only.')
 
     @commands.command(pass_context = True,no_pm = True)
     async def msg2(self,ctx,*,msg : str):
         server = ctx.message.server
+        members_messaged = 0
         '''Message everyone in the server.'''
         if ctx.message.author == ctx.message.server.owner or ctx.message.author.id == owner:
             for member in server.members:
@@ -233,6 +248,8 @@ class Mod():
                         print(member)
                     except:
                         print(member, "has DM's turned off")
+                    members_messaged++ # I know this works in java, not clear with python, just want to add 1 to members_messaged each time the loop is run            
+            await self.bot.say("Done. " + members_messaged + " members were DMed. (Prepare to have some angry people on your heels...)")
         else:
             await self.bot.say('Server owner only.')
 
@@ -261,7 +278,7 @@ class Mod():
             embed.set_footer(text=('ID: '+member.id))
             await self.bot.send_message(channel,embed=embed)
         else:
-            await self.bot.say('You cant warn mods dummy.')
+            await self.bot.say("You can't warn mods dummy.") # Why can't you warn mods? What's wrong with that?
 
 
     @commands.command(pass_context=True)
