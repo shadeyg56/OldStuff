@@ -17,18 +17,19 @@ class ClashRoyale:
 
     @commands.command(pass_context=True)
     async def cards(self,ctx):
+        """Shows the card names for reference."""
         with open('cogs/utils/cards.json') as f:
             cards = ', '.join(sorted(list(json.loads(f.read()).keys())))
         await self.bot.say('**Card names for reference:**\n```bf\n{}```'.format(cards))
 
     @commands.group(pass_context=True, invoke_without_command=True)
     async def deck(self, ctx, usr: discord.Member = None):
-        """See someones deck."""
+        """See someone's deck."""
         user = ctx.message.author
         if usr: user = usr
         try:
             with open('cogs/utils/decks.json') as f:
-                deck = json.loads(f.read())[user.id]
+                deck = json.loads(f.read())[user.id] # See if the user's deck is saved in decks.json
         except:
             await self.bot.say('*You need to set a deck. Do `.cards` to see exact spelling. Please follow this as a guideline:*\n\n `.deck set archers-11, thelog-2, graveyard-2, knight-11, infernotower-8, ewiz-2, poison-5, icegolem-8`')
         with open('cogs/utils/cards.json') as f:
@@ -48,12 +49,13 @@ class ClashRoyale:
         em = discord.Embed(color=0x00FFFF, description=desc)
         em.set_author(name=user.name, icon_url=user.avatar_url if user.avatar_url else user.default_avatar_url)
         em.add_field(name='Battle Deck', value=fmt)
-        em.set_footer(text='KnightBot')
+        em.set_footer(text='SpikeBot')
         em.set_thumbnail(url=thumb)
         await self.bot.say(embed=em)
 
     @deck.command(pass_context=True, aliases=['desc', 'info'])
     async def description(self, ctx, *, desc : str):
+        """Set your description."""
         user = ctx.message.author
         with open('cogs/utils/decks.json') as f:
             decks = json.loads(f.read())
@@ -65,6 +67,7 @@ class ClashRoyale:
 
     @deck.command(pass_context=True)
     async def league(self, ctx, *, thumb: str = None):
+        """Set your league."""
         user = ctx.message.author
         thumbnails = {
         'challenger 1':"https://www.deckshop.pro/img/league/Challenger-1.png",
@@ -469,7 +472,7 @@ class ClashRoyale:
         em.add_field(name='Upcoming Chests',value=data['chests'][0],inline=True)
         em.add_field(name='Chests Until',value=data['chests'][1],inline=True)
         # em.set_thumbnail(url='http://site-449644.mozfiles.com/files/449644/logo-1.png?1483382330').
-        em.set_footer(text='KnightBot Async | Data from statsroyale.com')
+        em.set_footer(text='SpikeBot Async | Data from statsroyale.com')
         return em
 
 
