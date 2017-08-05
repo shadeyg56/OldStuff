@@ -6,11 +6,11 @@ import time
 import random
 from PythonGists import PythonGists
 import json
-from .utils import launcher
+from .utils import settings
 from __main__ import send_cmd_help
 
 
-info = launcher.bot()
+info = settings.bot()
 owner = info['owner']
 
 
@@ -157,9 +157,9 @@ class Info():
             users = 0
             for server in self.bot.servers:
                 users += len(server.members)
-            invite = '[bot.discord.io/knightbot](https://bot.discord.io/knightbot)'
+            invite = '[bot.discord.io/spikebot](https://bot.discord.io/spikebot)'
             discord_ = '[discord.io/brawlstars](https://discord.gg/c9NUu2W)'
-            github = '[verixx/knightbot](https://github.com/verixx/knightbot)'
+            github = '[verixx/spikebot](https://github.com/verixx/spikebot)'
             time = ctx.message.timestamp
             emb = discord.Embed(colour=0x00FFFF)
             emb.set_author(name='SpikeBot', icon_url=self.bot.user.avatar_url)
@@ -168,11 +168,11 @@ class Info():
             emb.add_field(name='Creator',value=creator)
             emb.add_field(name='Servers',value=servers)
             emb.add_field(name='Users',value=users)
-            emb.add_field(name='Invite',value='Private Bot')
+            emb.add_field(name='Invite',value=invite)
             emb.add_field(name='Github',value=github)
             emb.add_field(name='Discord',value=discord_)
             emb.add_field(name='Uptime',value=time_)
-            emb.set_footer(text="ID: {} | Powered by KnightBot".format(self.bot.user.id))
+            emb.set_footer(text="ID: {} | Powered by KnightBot (legacy)".format(self.bot.user.id))
             emb.set_thumbnail(url=self.bot.user.avatar_url)
             await self.bot.say(embed=emb)
         elif ctx.message.author.id == data['bot']['owner']:
