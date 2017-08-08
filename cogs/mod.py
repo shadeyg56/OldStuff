@@ -236,7 +236,7 @@ class Mod():
                     print(member)
                 except:
                     print(member, "has DM's turned off")
-                members_messaged++ # I know this works in java, not clear with python, just want to add 1 to members_messaged each time the loop is run            
+                members_messaged += 1 # fixed
             await self.bot.say("Done. " + members_messaged + " members were DMed. (Prepare to have some angry people on your heels...)")
         else:
             await self.bot.say('Server owner only.')
