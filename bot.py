@@ -296,14 +296,6 @@ async def register(ctx):
     await bot.add_reaction(ctx.message, '\u2705')
 
 
-if __name__ == "__main__":
-    for extension in startup_extensions:
-        try:
-            bot.load_extension(extension)
-            print('Loaded extension: {}'.format(extension))
-        except Exception as e:
-            exc = '{}: {}'.format(type(e).__name__, e)
-            print('Failed to load extension {}\n{}'.format(extension, exc))
 
 
 bot.run(token)
