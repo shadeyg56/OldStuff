@@ -1,6 +1,6 @@
 import discord 
-import Bot
-import commands
+from ext.commands import Bot
+from ext import commands
 import datetime
 import time
 import sys
