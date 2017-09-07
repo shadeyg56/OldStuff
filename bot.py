@@ -30,7 +30,7 @@ owner = info['owner']
 
 
 
-startup_extensions = [
+_extensions = [
 
     'cogs.info',
     'cogs.misc',
