@@ -73,8 +73,7 @@ async def on_ready():
     print('THE BOT IS ONLINE')
     print('------------------------------------')
     print("Name: {}".format(bot.user.name))
-    print('Author: verix')
-    print("umbr was here") #remove this if you want
+    print('Author: shadeyg56')
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
