@@ -64,7 +64,7 @@ async def get_pre(bot, message):
     else:
         return config[message.server.id]['prefix']
 
-bot = commands.Bot(description=description, command_prefix=d., pm_help=None)
+bot = commands.Bot(description=description, command_prefix=get_pre, pm_help=None)
 bot.remove_command('help')
 
 @bot.event
