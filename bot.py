@@ -49,8 +49,8 @@ startup_extensions = [
 ]
 
 Client = discord.Client()
-description = ('A rogue Spike stumbled upon discord. '
-'Made by verix \n')
+description = ('Bot made with discord.py by -= shadeyg56 =-#1702. '
+'Made by shadeyg56 \n')
 
 
 async def get_pre(bot, message):
@@ -58,7 +58,7 @@ async def get_pre(bot, message):
         config = json.loads(f.read())
     try:
         if message.server.id not in config:
-            return '!'
+            return 'd.'
     except:
         pass
     else:
