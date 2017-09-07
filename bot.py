@@ -299,4 +299,4 @@ async def register(ctx):
 
 
 
-bot.run(token)
+bot.run(TOKEN)
