@@ -31,8 +31,11 @@ owner = info['owner']
 
 
 _extensions = [
-
-    
+ 
+ 
+    'cogs.misc'
+ 
+ 
 ]
 
 Client = discord.Client()
