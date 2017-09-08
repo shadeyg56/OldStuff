@@ -32,20 +32,7 @@ owner = info['owner']
 
 _extensions = [
 
-    'cogs.info',
-    'cogs.misc',
-    'cogs.mod',
-    'cogs.embed',
-    'cogs.polls',
-    'cogs.robolog',
-    'cogs.tags',
-    'cogs.setup',
-    'cogs.levels',
-    'cogs.repl',
-    'cogs.alias',
-    'cogs.conn4',
-    'cogs.tourney',
-    'cogs.clashroyale'
+    
 ]
 
 Client = discord.Client()
