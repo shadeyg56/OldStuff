@@ -4,8 +4,8 @@ from ext import commands
 
 class Misc:()
   
-  
-    def __init__(self, bot):
+   
+   def __init__(self, bot):
     
 @bot.command(pass_context = True)
 async def ping(self, ctx):
