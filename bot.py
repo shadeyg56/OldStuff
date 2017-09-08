@@ -294,6 +294,11 @@ async def register(ctx):
     role = discord.utils.get(server.roles, name='4row')
     await bot.add_roles(user, role)
     await bot.add_reaction(ctx.message, '\u2705')
+   
+@bot.command(pass_context = True)
+async def shutdown(ctx)
+    await bot.logout()
+    await bot.say('Shutting down...')
 
 
 
