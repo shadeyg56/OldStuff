@@ -296,9 +296,18 @@ async def register(ctx):
     await bot.add_reaction(ctx.message, '\u2705')
    
 @bot.command(pass_context = True)
-async def shutdown(ctx)
+async def shutdown(ctx):
+    await bot.say('Shutting down, see you later.')
     await bot.logout()
-    await bot.say('Shutting down...')
+   
+for extension in _extensions:
+    try:
+        bot.load_extension(extension)
+        print('Loaded: {}'.format(extension))
+    except Exception as e:
+        exc = '{}: {}'.format(type(e).__name__, e)
+        print('Error on load: {}\n{}'.format(extension, exc))
+   
 
 
 
