@@ -18,3 +18,6 @@ async def ping(self, ctx):
     await self.bot.send_message(ctx.message.channel, embed=pong)
     await self.bot.add_reaction(pong, '\U0001f3d3')
 
+def setup(bot):
+    bot.add_cog(Misc(bot))
+
