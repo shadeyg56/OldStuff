@@ -35,7 +35,7 @@ startup_extensions = [
  
     'cogs.misc',
     'cogs.mod',
-    'cogs.poll'
+    'cogs.polls'
  
  
 ]
