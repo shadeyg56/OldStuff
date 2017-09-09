@@ -4,12 +4,12 @@ from ext import commands
 import datetime
 import time
 
-class Misc:()
+class Misc:
 def __init__(self, bot):
         self.bot = bot
     
 @commands.command(pass_context = True)
-async def ping(self, ctx):
+async def ping(self,ctx):
     msgtime = ctx.message.timestamp.now
     await (await self.bot.ws.ping)
     now = datetime.datetime.now
