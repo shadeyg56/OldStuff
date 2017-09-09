@@ -18,6 +18,12 @@ async def ping(self,ctx):
                         color=FF3DFE)
     await self.bot.send_message(ctx.message.channel, embed=pong)
     await self.bot.add_reaction(pong, '\U0001f3d3')
+    
+@commands.command(pass_context = True)
+async def say(self,ctx, message: str):
+    '''Say something as the bot'''
+    await self.bot.say(message)
+    await self.bot.delete_message(ctx.message)
 
 def setup(bot):
     bot.add_cog(Misc(bot))
