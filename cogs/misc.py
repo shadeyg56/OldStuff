@@ -4,7 +4,7 @@ from ext import commands
 import datetime
 import time
 
-class Misc:
+class Misc():
     def __init__(self, bot):
             self.bot = bot
     
