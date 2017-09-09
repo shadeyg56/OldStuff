@@ -6,7 +6,7 @@ import time
 import random
 from PythonGists import PythonGists
 import json
-from .utils import settings
+from .utils import asyncio
 from __main__ import send_cmd_help
 
 
