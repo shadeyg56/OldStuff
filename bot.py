@@ -33,7 +33,8 @@ owner = info['owner']
 startup_extensions = [
  
  
-    'cogs.misc'
+    'cogs.misc',
+    'cogs.mod'
  
  
 ]
