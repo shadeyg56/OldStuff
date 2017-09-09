@@ -69,6 +69,7 @@ async def on_ready():
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
+    await bot.send_message(bot.servers, 'Good morning')
     
 
 
