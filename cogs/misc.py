@@ -3,8 +3,8 @@ from ext.commands import Bot
 from ext import commands
 
 class Misc:()
-  
     def __init__(self, bot):
+    self.bot = bot
     
 @bot.command(pass_context = True)
 async def ping(self, ctx):
