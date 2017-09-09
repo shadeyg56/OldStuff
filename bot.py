@@ -300,7 +300,7 @@ if __name__ == "__main__":
             print('Error on load: {}\n{}'.format(extension, exc))
            
 @bot.command(pass_context = True)
-async def ping(self):
+async def ping(self, ctx):
     msgtime = ctx.message.timestamp.now()
     await (await self.bot.ws.ping())
     now = datetime.datetime.now()
