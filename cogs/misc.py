@@ -5,8 +5,8 @@ import datetime
 import time
 
 class Misc:
-def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot):
+            self.bot = bot
     
 @commands.command(pass_context = True)
 async def ping(self,ctx):
