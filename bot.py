@@ -299,8 +299,8 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Error on load: {}\n{}'.format(extension, exc))
            
-@commands.command(pass_context = True)
-async def ping(self,ctx):
+@bot.command(pass_context = True)
+async def ping(self):
     msgtime = ctx.message.timestamp.now()
     await (await self.bot.ws.ping())
     now = datetime.datetime.now()
