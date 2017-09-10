@@ -6,7 +6,7 @@ import time
 class Misc():
     
   def __init__(self, bot):
-       self.bot = bot
+      self.bot = bot
     
   @commands.command(pass_context = True)
   async def ping(self,ctx):
