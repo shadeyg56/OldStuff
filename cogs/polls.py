@@ -20,6 +20,10 @@ async def ping(self,ctx):
                         color=FF3DFE)
     await self.bot.send_message(ctx.message.channel, embed=pong)
     await self.bot.add_reaction(pong, '\U0001f3d3')
+    
+@commands.command(pass_context = True)
+async def test(self,ctx):
+    await bot.say('hi')
                 
             
 def setup(bot):
