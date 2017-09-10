@@ -86,7 +86,7 @@ async def help(ctx):
             msg[i] = '`' + x + '`'
 
     p = Pages(bot, message=ctx.message, entries=msg)
-    p.embed.set_author(name='Help - SpikeBot Commands', icon_url=bot.user.avatar_url)
+    p.embed.set_author(name='Help - Darkness Commands', icon_url=bot.user.avatar_url)
     p.embed.color = 0x00FFFF
     await p.paginate()
 
@@ -158,8 +158,8 @@ async def on_member_remove(member):
 @bot.event
 async def on_server_join(server):
     await bot.send_message(server,
-        "**Hello!** *Thanks for inviting me to your server!*"
-        " **Get started with:** `.config set` and `.help`")
+        "Hey, Im glad tou invited me here, my prefix is d."
+        
 
 def fmt_help(page):
     cmd = ''
