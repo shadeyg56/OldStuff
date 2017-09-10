@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from .utils import asyncio
+from .utils import .json
 
 class KatCog:
   def __init__(self, bot):
