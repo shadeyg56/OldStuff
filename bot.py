@@ -243,7 +243,7 @@ async def _set(Type=None,*,thing=None):
             await bot.say('Cleared Presence')
         elif Type.lower() == 'servers':
             await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
-            await bot.say('Im not playing with {} servers.'.format(server))
+            await bot.say('**Im now playing with {} servers.**'.format(server))
         else:
             await bot.say('Usage: `.presence [game/stream] [message]`')
         
