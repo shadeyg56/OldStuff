@@ -160,7 +160,6 @@ async def on_server_join(server):
     await bot.send_message(server,
         "Hey, Im glad tou invited me here, my prefix is d."
         
-
 def fmt_help(page):
     cmd = ''
     for line in page.splitlines():
