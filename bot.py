@@ -34,8 +34,7 @@ startup_extensions = [
  
  
     'cogs.misc',
-    'cogs.mod',
-    'cogs.polls'
+    'cogs.KatCog'
  
  
 ]
