@@ -298,14 +298,13 @@ async def shutdown(ctx):
     await bot.say('Shutting down, see you later.')
     await bot.logout()
  
-if __name__ == "__main__":
-    for extension in startup_extensions:
-        try:
-            bot.load_extension(extension)
-            print('Loaded: {}'.format(extension))
-        except Exception as e:
-            exc = '{}: {}'.format(type(e).__name__, e)
-            print('Error on load: {}\n{}'.format(extension, exc))
+for extension in startup_extensions:
+    try:
+        bot.load_extension(extension)
+        print('Loaded: {}'.format(extension))
+    except Exception as e:
+        exc = '{}: {}'.format(type(e).__name__, e)
+        print('Error on load: {}\n{}'.format(extension, exc))
    
 
 
