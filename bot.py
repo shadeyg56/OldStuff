@@ -227,6 +227,7 @@ async def _reload(ctx,*, module : str):
 @bot.command(name='presence')
 async def _set(Type=None,*,thing=None):
     """Change the bot's discord game/stream!"""
+    server = len(bot.servers)
     if Type is None:
             await bot.say('Usage: `.presence [game/stream] [message]`')
     else:
@@ -239,8 +240,11 @@ async def _set(Type=None,*,thing=None):
         elif Type.lower() == 'clear':
             await bot.change_presence(game=None)
             await bot.say('Cleared Presence')
+        elif Type.lower() == 'servers':
+            await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
         else:
             await bot.say('Usage: `.presence [game/stream] [message]`')
+        
 
 @bot.command(pass_context=True)
 @is_owner()
