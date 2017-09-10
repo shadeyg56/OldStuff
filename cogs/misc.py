@@ -1,4 +1,5 @@
 import discord
+from ext.commands import Bot
 from discord.ext import commands
 import datetime
 import time
