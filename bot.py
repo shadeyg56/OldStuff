@@ -298,7 +298,7 @@ async def shutdown(ctx):
     await bot.say('Shutting down, see you later.')
     await bot.logout()
  
-if __name__ = "__main__":
+if __name__ == "__main__":
     for extension in startup_extensions:
         try:
             bot.load_extension(extension)
