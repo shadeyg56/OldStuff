@@ -69,7 +69,8 @@ async def on_ready():
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
-    await bot.send_message(bot.servers, 'Good morning')
+    server = len(bot.servers)
+    await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
     
 
 
@@ -242,6 +243,7 @@ async def _set(Type=None,*,thing=None):
             await bot.say('Cleared Presence')
         elif Type.lower() == 'servers':
             await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
+            await bot.say('Im not playing with {} servers.'.format(server))
         else:
             await bot.say('Usage: `.presence [game/stream] [message]`')
         
