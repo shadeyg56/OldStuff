@@ -1,4 +1,4 @@
-from .utils import discord
+import discord
 from ext.commands import Bot
 from ext import commands
 import datetime
@@ -6,6 +6,7 @@ import time
 import random
 import asyncio
 import json
+from .utils import launcher
 
 
 
