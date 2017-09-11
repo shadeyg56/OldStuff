@@ -10,14 +10,14 @@ class Misc():
       self.bot = bot
         
   async def send_cmd_help(self,ctx):
-       if ctx.invoked_subcommand:
-           pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
-           for page in pages:
-               await self.bot.send_message(ctx.message.channel, page)
-       else:
-           pages = self.bot.formatter.format_help_for(ctx, ctx.command)
-           for page in pages:
-               await self.bot.send_message(ctx.message.channel, page)
+      if ctx.invoked_subcommand:
+          pages = self.bot.formatter.format_help_for(ctx, ctx.invoked_subcommand)
+          for page in pages:
+              await self.bot.send_message(ctx.message.channel, page)
+      else:
+          pages = self.bot.formatter.format_help_for(ctx, ctx.command)
+          for page in pages:
+              await self.bot.send_message(ctx.message.channel, page)
      
     
   @commands.command(pass_context = True)
