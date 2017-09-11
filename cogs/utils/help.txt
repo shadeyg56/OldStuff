@@ -1,7 +1,9 @@
 
   
 **Misc:**
-  .ping                Check the bot's reponse time
+  .ping                Check the bot's reponse time(not working)
+  .invite              Get the OAuth invite link for the bot
+  .suggest             Add a suggestion for the bot
 
 **No Category:**
   ._leave_server       Owner command to leave server
