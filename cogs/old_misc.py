@@ -4,8 +4,8 @@ from ext import commands
 import datetime
 import time
 import random
-import asyncio
-from .utils import json
+from .utils import asyncio
+import json
 
 
 
@@ -38,6 +38,7 @@ class Old_Misc():
         
     @commands.command(pass_context = True)
     async def test(self, ctx):
+        await asyncio.sleep(2)
         await self.bot.say('Hello')
         
     @commands.command(pass_context = True)
