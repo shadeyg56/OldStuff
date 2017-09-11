@@ -33,9 +33,7 @@ owner = info['owner']
 startup_extensions = [
  
  
-    'cogs.misc',
-    'cogs.KatCog',
-    'cogs.polls',
+    'cogs.mod',
     'cogs.old_misc'
  
  
