@@ -9,7 +9,7 @@ import json
 
 
 
-class Misc():
+class Old_Misc():
 
 
     def __init__(self, bot):
@@ -45,4 +45,4 @@ class Misc():
 
     
 def setup(bot):
-    bot.add_cog(Misc(bot))
+    bot.add_cog(Old_Misc(bot))
