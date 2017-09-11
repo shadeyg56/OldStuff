@@ -45,7 +45,7 @@ class Old_Misc():
         await self.bot.say('**Darkness Invite:** https://discordapp.com/oauth2/authorize?client_id=355189919410421760&scope=bot&permissions=66186303')
                       
     @commands.command(pass_context = True
-    async def suggest(self, ctx, message: str)
+    async def suggest(self, ctx, message: str):
         author = ctx.message.author
         avatar = author.avatar_url
         suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=00FBFF)
