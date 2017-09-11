@@ -32,8 +32,7 @@ class Misc():
         await (await self.bot.ws.ping())
         now = datetime.datetime.now()
         ping = now - msgtime
-        pong = discord.Embed(title='Pong! Response Time:', description=str(ping.microseconds / 1000.0) + ' ms',
-                            color=FF3DFE)
+        pong = discord.Embed(title='Pong! Response Time:', description=str(ping.microseconds / 1000.0) + ' ms', color=FF3DFE)
         await self.bot.send_message(ctx.message.channel, embed=pong)
         await self.bot.add_reaction(pong, '\U0001f3d3')
              
