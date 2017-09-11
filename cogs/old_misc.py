@@ -51,12 +51,14 @@ class Old_Misc():
         timestamp = ctx.message.timestamp
         message = ctx.message
         author = ctx.message.author
-        channel = self.bot.get_channel('356602525740433408', 'suggestions')
+        channel = self.bot.get_channel('356602525740433408','suggestions')
         avatar = author.avatar_url
         suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=0xed, timestamp=timestamp)
         suggestion.set_author(name=author, icon_url=avatar)
         await self.bot.send_message(channel, embed=suggestion)
         await self.bot.say('Suggestion added')
+        else:
+             await self.bot.say('Error')
     
              
 
