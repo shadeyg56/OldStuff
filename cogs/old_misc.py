@@ -49,7 +49,7 @@ class Old_Misc():
     @commands.command(pass_context = True)
     async def suggest(self, ctx, message: str):
         timestamp = ctx.message.timestamp
-        servee = ctx.messags.server
+        servee = ctx.message.server
         message = Message.content
         author = ctx.message.author
         channel = self.bot.get_channel('356602525740433408')
