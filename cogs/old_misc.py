@@ -57,8 +57,6 @@ class Old_Misc():
         suggestion.set_author(name=author, icon_url=avatar)
         await self.bot.send_message(channel, embed=suggestion)
         await self.bot.say('Suggestion added')
-        else:
-             await self.bot.say('Error')
     
              
 
