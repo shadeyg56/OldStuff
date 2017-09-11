@@ -1,10 +1,10 @@
-import discord
+from .utils import discord
 from ext.commands import Bot
 from ext import commands
 import datetime
 import time
 import random
-from .utils import asyncio
+import asyncio
 import json
 
 
