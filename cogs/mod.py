@@ -11,4 +11,7 @@ class Mod():
     @commands.command(pass_context = True)
     async def mod_test(self,ctx):
         await self.bot.say('The mod cog is working')
+        
+def setup(bot):
+    bot.add_cog(Mod(bot))
  
