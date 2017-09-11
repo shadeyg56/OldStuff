@@ -50,7 +50,7 @@ class Old_Misc():
     async def suggest(self, ctx, message: str):
         timestamp = ctx.message.timestamp
         servee = ctx.message.server
-        message = Message.content
+        message = ctx.message.content
         author = ctx.message.author
         channel = self.bot.get_channel('356602525740433408')
         avatar = author.avatar_url
