@@ -71,7 +71,14 @@ async def on_ready():
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
     server = len(bot.servers)
-    await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
+    while 1 == 1:
+        await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
+        await asyncio.sleep(30)
+        await bot.change_presence(game=discord.Game(name='PREFIX = d.'))
+        await asyncio.sleep(30)
+        await bot.change_presence(game=discord.Game(name='Currently WIP | Darkness'))
+        await asyncio.sleep(30)
+                            
     
 
 
