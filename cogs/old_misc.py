@@ -50,7 +50,7 @@ class Old_Misc():
     async def suggest(self, ctx, message: str):
         server = ctx.message.server
         author = ctx.message.author
-        channel = discord.utils.get(server.channels, name='suggestions', type=ChannelType.text)
+        channel = discord.utils.get(server.channels, name='suggestions')
         avatar = author.avatar_url
         suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=0xed)
         suggestion.set_author(name=author, icon_url=avatar)
