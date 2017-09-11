@@ -48,7 +48,7 @@ class Old_Misc():
     async def suggest(self, ctx, message: str):
         author = ctx.message.author
         avatar = author.avatar_url
-        suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=00FBFF)
+        suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=0xed)
         suggestion.set_author(name=author, icon_url=avatar)
         await self.bot.send_message(356602525740433408, embed=suggestion)
     
