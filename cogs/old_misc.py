@@ -39,6 +39,11 @@ class Old_Misc():
     @commands.command(pass_context = True)
     async def test(self, ctx):
         await self.bot.say('Hello')
+        
+    @commands.command(pass_context = True)
+    async def invite(self, ctx):
+        await self.bot.say('**Darkness Invite:** https://discordapp.com/oauth2/authorize?client_id=355189919410421760&scope=bot&permissions=66186303')
+                      
     
              
 
