@@ -49,7 +49,8 @@ class Old_Misc():
     @commands.command(pass_context = True)
     async def suggest(self, ctx, message: str):
         timestamp = ctx.message.timestamp
-        server = ctx.message.server
+        message = ctx.message
+        server = 356599668739670048
         author = ctx.message.author
         channel = discord.utils.get(server.channels, name='suggestions')
         avatar = author.avatar_url
