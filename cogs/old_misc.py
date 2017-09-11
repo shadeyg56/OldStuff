@@ -52,7 +52,7 @@ class Old_Misc():
         message = ctx.message
         server = 356599668739670048
         author = ctx.message.author
-        channel = discord.utils.get(server.channels, name='suggestions')
+        channel = discord.utils.get(str)(server.channels, name='suggestions')
         avatar = author.avatar_url
         suggestion = discord.Embed(title='Suggestion', description='{}'.format(message), color=0xed, timestamp=timestamp)
         suggestion.set_author(name=author, icon_url=avatar)
