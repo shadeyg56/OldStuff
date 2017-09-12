@@ -31,7 +31,7 @@ class Old_Misc():
     async def ping(self,ctx):
         pingtime = time.time()
         ping = time.time() - pingtime
-        pong = discord.Embed(title='Pong! Response Time:', description=str(ping, color=FF3DFE))
+        pong = discord.Embed(title='Pong! Response Time:', description=str(ping, color=0xed))
         await self.bot.say(embed=pong)
         await self.bot.add_reaction(pong, '\U0001f3d3')
         
