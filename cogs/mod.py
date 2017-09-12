@@ -40,8 +40,8 @@ class Mod():
             try:
                 await self.bot.kick(member)
                 await self.bot.say('{} was kicked'.format(member))
-                except discord.Forbidden:
-                    await bot.say("You dont have the perms for that")
+            except discord.Forbidden:
+                await bot.say("You dont have the perms for that")
         
                       
                          
