@@ -35,7 +35,6 @@ class Mod():
         return discord.utils.get(author.roles,name=modrole) 
     
     @commands.command(pass_context = True)
-    @commands.check(mod)
     async def kick(self, ctx, member: discord.Member):
         if not ctx.message.author.server_permissions.kick_members:
             self.bot.kick(member)
