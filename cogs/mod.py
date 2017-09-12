@@ -36,7 +36,7 @@ class Mod():
     
     @commands.command(pass_context = True)
     async def kick(self, ctx, member: discord.Member):
-        if not ctx.message.author.server_permissions.kick_members:
+        if ctx.message.author.server_permissions.kick_members:
             self.bot.kick(member)
             await self.bot.say('{} was kicked'.format(member))
                       
