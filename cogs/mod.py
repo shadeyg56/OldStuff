@@ -39,7 +39,7 @@ class Mod():
         if ctx.message.author.server_permissions.kick_members:
             await self.bot.kick(member)
             await self.bot.say('{} was kicked'.format(member))
-            else:
+            elif:
                 await self.bot.say('You dont have perms for that')
         
                       
