@@ -32,7 +32,12 @@ class Mod():
             adminrole = adminrole.name
         if discord.utils.get(author.roles,name=adminrole):
             return True
-        return discord.utils.get(author.roles,name=modrole) 
+        return discord.utils.get(author.roles,name=modrole)
+    
+   @kick.error
+   async def functionName(error, ctx):
+       if isinstance(error, discord.Forbidden):
+           print('You dont have perms for that')
     
     @commands.command(pass_context = True)
     @commands.has_permissions(kick_members=True)
