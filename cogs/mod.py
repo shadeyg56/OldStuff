@@ -35,14 +35,14 @@ class Mod():
         return discord.utils.get(author.roles,name=modrole) 
     
     @commands.command(pass_context = True)
-    async def kick(self, ctx, member: discord.Member):
+    @commands.has_permissions(kick_members=True)
+    async def kick(self, ctx, member: discord.Member):       
         if ctx.message.author.server_permissions.kick_members:
             try:
                 await self.bot.kick(member)
                 await self.bot.say('{} was kicked'.format(member))
-            except Exception as e:
-                if 'Privilege is too low' in str(e):
-                    await self.bot.say("You dont have the perms for that")
+            except discord.Foribidden:
+                await self.bot.say("You dont have the perms for that")
         
                       
                          
