@@ -38,7 +38,7 @@ class Mod():
     async def kick(self, ctx, member: discord.Member):
         if not ctx.message.author.server_permissions.kick_members:
             self.bot.kick(member)
-            await self.bot.say('{} was kicked'.format(member)
+            await self.bot.say('{} was kicked'.format(member))
                       
                            
                            
