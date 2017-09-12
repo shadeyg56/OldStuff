@@ -40,8 +40,9 @@ class Mod():
             try:
                 await self.bot.kick(member)
                 await self.bot.say('{} was kicked'.format(member))
-            except discord.Forbidden:
-                await self.bot.say("You dont have the perms for that")
+            except Exception as e:
+                if 'Privilege is too low' in str(e):
+                    await self.bot.say("You dont have the perms for that")
         
                       
                          
