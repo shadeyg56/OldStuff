@@ -33,7 +33,6 @@ class Old_Misc():
         ping = time.time() - pingtime
         pong = discord.Embed(title='Pong! Response Time:', description=str(ping), color=0xed)
         await self.bot.say(embed=pong)
-        await self.bot.add_reaction(embed=pong, '\U0001f3d3')
         
     @commands.command(pass_context = True)
     async def test(self, ctx):
