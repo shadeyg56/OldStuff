@@ -1,7 +1,7 @@
 import discord
 from ext.commands import Bot
 from ext import commands
-from .utils import launched
+from .utils import launcher
 
 class Mod():
 
