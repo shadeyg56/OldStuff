@@ -38,8 +38,8 @@ class Mod():
     async def functionName(error, ctx):
         if isinstance(error, discord.Forbidden):
             print('You dont have perms for that')
-    
-    @commands.command(pass_context = True)
+   
+    @commands.command(pass_context = True, name='kick')
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member):       
         if ctx.message.author.server_permissions.kick_members:
