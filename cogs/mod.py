@@ -39,9 +39,9 @@ class Mod():
         if ctx.message.author.server_permissions.kick_members:
             await self.bot.kick(member)
             await self.bot.say('{} was kicked'.format(member))
-            except Exception as e:
-        if 'Privilege is too low' in str(e):
-            return await bot.say("You dont have the perms for that")
+            try:
+                except discord.Forbidden:
+                    return await bot.say("You dont have the perms for that")
         
                       
                          
