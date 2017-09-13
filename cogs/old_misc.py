@@ -56,6 +56,12 @@ class Old_Misc():
         suggestion.set_footer(text='Sent from {}'.format(server))
         await self.bot.send_message(channel, embed=suggestion)
         await self.bot.say('Suggestion added')
+        
+    @commands.command(pass_context = True)
+    async def support(self, ctx):
+        await self.bot.say('**Darkness Support:** https://discord.gg/Jjdp8hf')
+    
+     
     
              
 
