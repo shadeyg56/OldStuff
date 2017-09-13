@@ -84,7 +84,8 @@ async def on_ready():
         await asyncio.sleep(10)
         await bot.change_presence(game=discord.Game(name='Currently WIP | Darkness'))
         await asyncio.sleep(10)
-    
+        await bot.change_presence(game=discord.Game(name='d.support | d.invite'))
+        await asyncio.sleep(25)
                             
     
 
