@@ -61,7 +61,7 @@ class Mod():
             try:
                 await self.bot.unban(server, member)
                 await self.bot.say('{} was unbanned'.format(member))
-            except discord.Forbiddenn:
+            except discord.Forbidden:
                 await self.bot.say("You dont have the perms for that")
                      
                 
