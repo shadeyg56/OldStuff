@@ -314,6 +314,15 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Error on load: {}\n{}'.format(extension, exc))
            
+def cleanup_code( content):
+    """Automatically removes code blocks from the code."""
+    # remove ```py\n```
+    if content.startswith('```') and content.endswith('```'):
+        return '\n'.join(content.split('\n')[1:-1])
+
+    # remove `foo`
+    return content.strip('` \n')        
+           
 def get_syntax_error(e):
     if e.text is None:
         return '```py\n{0.__class__.__name__}: {0}\n```'.format(e)
