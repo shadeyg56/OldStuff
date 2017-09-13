@@ -13,6 +13,7 @@ import random
 from cogs.utils.paginator import Pages
 import io
 import textwrap
+import traceback
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)
