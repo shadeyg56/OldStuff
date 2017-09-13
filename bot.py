@@ -314,6 +314,19 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Error on load: {}\n{}'.format(extension, exc))
            
+def get_syntax_error(e):
+    if e.text is None:
+        return '```py\n{0.__class__.__name__}: {0}\n```'.format(e)
+    return '```py\n{0.text}{1:>{0.offset}}\n{2}: {0}```'.format(e, '^', type(e).__name__)
+
+async def to_code_block(ctx, body):
+    if body.startswith('```') and body.endswith('```'):
+        content = '\n'.join(body.split('\n')[1:-1])
+    else:
+        content = body.strip('`')
+    await bot.edit_message(ctx.message, '```py\n'+content+'```')
+           
+           
 @bot.command(pass_context=True, name='eval')
 async def _eval(ctx, *, body: str):
     '''Run python scripts on discord!'''
