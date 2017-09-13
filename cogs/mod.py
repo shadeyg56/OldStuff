@@ -54,14 +54,14 @@ class Mod():
                 await self.bot.say("You dont have the perms for that")
                
     @commands.command(pass_context = True)
-    async def unban(self, ctx, member: discord.Member): 
+    async def unban(self, ctx, member: str): 
         server = ctx.message.server
         member = discord.Object(id=member)
         if ctx.message.author.server_permissions.ban_members:
             try:
                 await self.bot.unban(server, member)
                 await self.bot.say('{} was unbanned'.format(member))
-            except discord.Foribidden:
+            except discord.Forbiddenn:
                 await self.bot.say("You dont have the perms for that")
                      
                 
