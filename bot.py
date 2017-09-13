@@ -73,8 +73,7 @@ async def on_ready():
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
     timestamp = ctx.message.timestamp
-    embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed, timestamp=timestamp
-    embed.set_footer(text='Darkness ready for use')             
+    embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed, timestamp=timestamp            
     server = len(bot.servers)
     channel = bot.get_channel('356599668739670049'
     await bot.send_message(channel, embed=embed)         
