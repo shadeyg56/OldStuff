@@ -76,7 +76,7 @@ async def on_ready():
     embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed, timestamp=timestamp)      
     embed.set_footer('Darkness ready for use')
     server = len(bot.servers)
-    channel = bot.get_channel('356599668739670049'
+    channel = bot.get_channel('356599668739670049')
     await bot.send_message(channel, embed=embed)         
     while 1 == 1:
         await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
