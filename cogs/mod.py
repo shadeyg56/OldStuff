@@ -34,20 +34,39 @@ class Mod():
             return True
         return discord.utils.get(author.roles,name=modrole)
     
-    @kick.error
-    async def functionName(error, ctx):
-        if isinstance(error, discord.Forbidden):
-            print('You dont have perms for that')
-   
+    
     @commands.command(pass_context = True, name='kick')
-    @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member):       
         if ctx.message.author.server_permissions.kick_members:
             try:
                 await self.bot.kick(member)
                 await self.bot.say('{} was kicked'.format(member))
+            except discord.Forbidden:
+                await self.bot.say("You dont have the perms for that")
+                
+    @commands.command(pass_context = True)
+    async def ban(self, ctx, member: discord.Member):       
+        if ctx.message.author.server_permissions.ban_members:
+            try:
+                await self.bot.ban(member)
+                await self.bot.say('{} was banned'.format(member))
+            except discord.Forbidden:
+                await self.bot.say("You dont have the perms for that")
+               
+    @commands.command(pass_context = True)
+    async def unban(self, ctx, member: discord.Member): 
+        server = ctx.message.server
+        member = discord.Object(id=member)
+        if ctx.message.author.server_permissions.ban_members:
+            try:
+                await self.bot.unban(server, member)
+                await self.bot.say('{} was unbanned'.format(member))
             except discord.Foribidden:
                 await self.bot.say("You dont have the perms for that")
+                     
+                
+                
+                
         
                       
                          
