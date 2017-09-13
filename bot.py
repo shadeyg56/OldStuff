@@ -134,9 +134,8 @@ async def on_member_join(member):
             channel = discord.utils.get(server.channels, id=channel)
 
         await bot.send_message(darkness, 'Welcome {} to {}. Please read #info-and-rules and enjoy your stay. Do d.help to check out the bot'.format(member, server))
-        else:
-            kats = bot.get_channel('313863292126756864')
-            await bot.send_message(kats, '{} Welcome to **Dragons and Kats**! Have a great time here and enjoy yourselves!!!:wink: !'.format(member))
+        kats = bot.get_channel('313863292126756864')
+        await bot.send_message(kats, '{} Welcome to **Dragons and Kats**! Have a great time here and enjoy yourselves!!!:wink: !'.format(member))
 
     autorole = data[server.id]["autorole"]
     autorole = discord.utils.get(server.roles,id=autorole)
