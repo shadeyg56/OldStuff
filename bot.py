@@ -117,6 +117,8 @@ def is_owner():
 async def on_member_join(member):
     with open('cogs/utils/t_config.json') as f:
         data = json.loads(f.read())
+    darkness = bot.get_channel('356599668739670049')
+    
     server = member.server
     status = data[server.id]["welcome"]["status"]
     if status:
@@ -131,7 +133,10 @@ async def on_member_join(member):
         else:
             channel = discord.utils.get(server.channels, id=channel)
 
-        await bot.send_message(channel, fmt.format(member, server))
+        await bot.send_message(darkness, 'Welcome {} to {}. Please read #info-and-rules and enjoy your stay. Do d.help to check out the bot'.format(member, server))
+        else:
+            kats = bot.get_channel('313863292126756864')
+            await bot.send_message(kats, '{} Welcome to **Dragons and Kats**! Have a great time here and enjoy yourselves!!!:wink: !'.format(member))
 
     autorole = data[server.id]["autorole"]
     autorole = discord.utils.get(server.roles,id=autorole)
