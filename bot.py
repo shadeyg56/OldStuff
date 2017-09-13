@@ -312,7 +312,7 @@ async def register(ctx):
 @bot.command(pass_context = True)
 async def shutdown(ctx):
     timestamp = ctx.message.timestamp                         
-    embed=discord.Embeb(title='Good Night', description='See you tomorrow', color=0xed, timestamp=timestamp)
+    embed=discord.Embed(title='Good Night', description='See you tomorrow', color=0xed, timestamp=timestamp)
     embed.set_footer(text='Darkness no longer online')
     await bot.say(embed=embed)
     await bot.logout()
