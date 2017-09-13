@@ -63,7 +63,7 @@ bot = commands.Bot(description=description, command_prefix=get_pre, pm_help=None
 bot.remove_command('help')
 
 @bot.event
-async def on_ready():
+async def on_ready(ctx):
     print('------------------------------------')
     print('THE BOT IS ONLINE')
     print('------------------------------------')
