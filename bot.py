@@ -63,7 +63,7 @@ bot = commands.Bot(description=description, command_prefix=get_pre, pm_help=None
 bot.remove_command('help')
 
 @bot.event
-async def on_ready(ctx):
+async def on_ready():
     print('------------------------------------')
     print('THE BOT IS ONLINE')
     print('------------------------------------')
@@ -72,8 +72,7 @@ async def on_ready(ctx):
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
-    timestamp = ctx.message.timestamp
-    embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed, timestamp=timestamp)      
+    embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed)   
     embed.set_footer('Darkness ready for use')
     server = len(bot.servers)
     channel = bot.get_channel('356599668739670049')
