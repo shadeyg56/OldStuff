@@ -72,7 +72,12 @@ async def on_ready():
     print("ID: {}".format(bot.user.id))
     print('DV: {}'.format(discord.__version__))
     bot.uptime = datetime.datetime.now()
+    timestamp = ctx.message.timestamp
+    embed=discord.Embed(title='Good Morning', description='Up and at em', color=0xed, timestamp=timestamp
+    embed.set_footer(text='Darkness ready for use')             
     server = len(bot.servers)
+    channel = bot.get_channel('356599668739670049'
+    await bot.send_message(channel, embed=embed)         
     while 1 == 1:
         await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
         await asyncio.sleep(10)
@@ -80,6 +85,7 @@ async def on_ready():
         await asyncio.sleep(10)
         await bot.change_presence(game=discord.Game(name='Currently WIP | Darkness'))
         await asyncio.sleep(10)
+    
                             
     
 
@@ -306,7 +312,10 @@ async def register(ctx):
    
 @bot.command(pass_context = True)
 async def shutdown(ctx):
-    await bot.say('Shutting down, see you later.')
+    timestamp = ctx.message.timestamp                         
+    embed=discord.Embeb(title='Good Night', description='See you tomorrow', color=0xed, timestamp=timestamp)
+    embed.set_footer(text='Darkness no longer online')
+    await bot.say(embed=embed)
     await bot.logout()
  
 if __name__ == "__main__":
