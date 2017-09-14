@@ -59,7 +59,7 @@ class Old_Misc():
         
     @commands.command(pass_context = True)
     async def support(self, ctx):
-        await self.bot.say('**Darkness Support:** https://discord.gg/Jjdp8hf'
+        await self.bot.say('**Darkness Support:** https://discord.gg/Jjdp8hf')
                        
     @commands.command(pass_context = True)
     async def info(self, ctx):
