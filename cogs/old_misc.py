@@ -63,9 +63,9 @@ class Old_Misc():
                        
     @commands.command(pass_context = True)
     async def info(self, ctx):
-        embed = discord.Embed(title='Darkness Info', color=0xed, timestamp=time)
+        embed = discord.Embed(title='Darkness Info', color=0xed, timestamp=timestamp)
         servers = len(bot.servers)
-        time = ctx.message.timestamp                    
+        timestamp = ctx.message.timestamp                    
         embed.set_field(name='Author', value='<@300396755193954306>')
         embed.set_field(name='Servers', value=servers)
         embed.set_footer(text='Powered by discord.py')
