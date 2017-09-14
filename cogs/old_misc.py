@@ -68,7 +68,7 @@ class Old_Misc():
         servers = len(self.bot.servers)                    
         embed.add_field(name='Author', value='<@300396755193954306>')
         embed.add_field(name='Servers', value=servers)
-        embed.add_footer(text='Powered by discord.py')
+        embed.set_footer(text='Powered by discord.py')
         embed.set_thumbnail(url='http://data.whicdn.com/images/150102219/large.gif')
         await self.bot.say(embed=embed)                   
                           
