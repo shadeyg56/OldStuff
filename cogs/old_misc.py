@@ -66,9 +66,9 @@ class Old_Misc():
         stamp = ctx.message.timestamp
         embed = discord.Embed(title='Darkness Info', color=0xed, timestamp=stamp)
         servers = len(self.bot.servers)                    
-        embed.set_field(name='Author', value='<@300396755193954306>')
-        embed.set_field(name='Servers', value=servers)
-        embed.set_footer(text='Powered by discord.py')
+        embed.add_field(name='Author', value='<@300396755193954306>')
+        embed.add_field(name='Servers', value=servers)
+        embed.add_footer(text='Powered by discord.py')
         embed.set_thumbnail(url='http://data.whicdn.com/images/150102219/large.gif')
         await self.bot.say(embed=embed)                   
                           
