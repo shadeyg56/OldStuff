@@ -418,6 +418,12 @@ async def _eval(ctx, *, body: str):
                 await bot.add_reaction(x, '\U0001f535')
             except:
                 pass
+             
+@bot.event
+async def on_message(message, ctx):
+    channel = bot.get_channel('356602525740433408')
+    if message.channel.id == '356602525740433408':
+        await bot.send_message(channel, 'test')
    
 
 
