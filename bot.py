@@ -177,7 +177,7 @@ async def on_member_remove(member):
 
 @bot.event
 async def on_server_join(server):
-    await bot.send_message(server,
+    await bot.send_message(server)
         "Hey, Im glad you invited me here, my prefix is **d.**.")
         
 def fmt_help(page):
@@ -420,7 +420,7 @@ async def _eval(ctx, *, body: str):
                 pass
              
 @bot.event
-async def on_message(ctx, message):
+async def on_message(message):
     channel = bot.get_channel('356602525740433408')
     if message.channel.id == '356602525740433408':
         await bot.send_message(channel, 'test')
