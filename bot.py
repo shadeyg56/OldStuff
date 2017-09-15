@@ -177,8 +177,7 @@ async def on_member_remove(member):
 
 @bot.event
 async def on_server_join(server):
-    await bot.send_message(server)
-        "Hey, Im glad you invited me here, my prefix is **d.**.")
+    await bot.send_message(server, "Hey, Im glad you invited me here, my prefix is **d.**.")
         
 def fmt_help(page):
     cmd = ''
