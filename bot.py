@@ -420,7 +420,7 @@ async def _eval(ctx, *, body: str):
                 pass
              
 @bot.event
-async def on_message(ctx):
+async def on_message(ctx, message):
     channel = bot.get_channel('356602525740433408')
     if message.channel.id == '356602525740433408':
         await bot.send_message(channel, 'test')
