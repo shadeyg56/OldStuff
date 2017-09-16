@@ -77,23 +77,15 @@ class Old_Misc():
         await self.bot.say(embed=embed)    
         
     @commands.command(pass_context = True)
-    async def calc(self,*args):
+    async def calc(self,Type=None,*args):
         ans = 0
         try:
+            if Type.lower = add
             for i in args:
                 ans += int(i)
                 await self.bot.say(ans)
-            for i in args:
-                ans -= int(i)
-                await self.bot.say(ans)
-            for i in args:
-                ans *= int(i)
-                await self.bot.say(ans)
-            for i in args:
-                ans /= int(i)
-                await self.bot.say(ans)
         except:
-            await self.bot.say('You can only add numbers silly')
+            await self.bot.say('You can only use numbers silly')
        
 def setup(bot):
     bot.add_cog(Old_Misc(bot))
