@@ -80,7 +80,7 @@ class Old_Misc():
     async def calc(self,Type=None,*args):
         ans = 0
         try:
-            if Type.lower = add
+            if Type.lower() == 'add':
             for i in args:
                 ans += int(i)
                 await self.bot.say(ans)
