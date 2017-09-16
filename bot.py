@@ -178,6 +178,7 @@ async def on_member_remove(member):
 @bot.event
 async def on_server_join(server):
     embed = discord.Embed(title='Darkness Info', color=0xed)
+    owner = server.owner
     servers = len(bot.servers)                    
     embed.add_field(name='Author', value='<@300396755193954306>')
     embed.add_field(name='Servers', value=servers)    
@@ -187,7 +188,7 @@ async def on_server_join(server):
     embed.add_field(name='Invite', value='https://discordapp.com/oauth2/authorize?client_id=355189919410421760&scope=bot&permissions=66186303')
     embed.add_field(name='Support', value='https://discord.gg/Jjdp8hf')
     embed.add_field(name='GitHub', value='https://github.com/shadeyg56/darkness')
-    await bot.send_message(server, embed=embed)
+    await bot.send_message(owner, embed=embed)
         
 def fmt_help(page):
     cmd = ''
