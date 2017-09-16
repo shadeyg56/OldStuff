@@ -178,7 +178,7 @@ async def on_member_remove(member):
 @bot.event
 async def on_server_join(server):
     embed = discord.Embed(title='Darkness Info', color=0xed)
-    servers = len(self.bot.servers)                    
+    servers = len(bot.servers)                    
     embed.add_field(name='Author', value='<@300396755193954306>')
     embed.add_field(name='Servers', value=servers)    
     embed.add_field(name='Prefix', value='d.')
