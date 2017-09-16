@@ -74,7 +74,35 @@ class Old_Misc():
         embed.add_field(name='Invite', value='https://discordapp.com/oauth2/authorize?client_id=355189919410421760&scope=bot&permissions=66186303')
         embed.add_field(name='Support', value='https://discord.gg/Jjdp8hf')
         embed.add_field(name='GitHub', value='https://github.com/shadeyg56/darkness')
-        await self.bot.say(embed=embed)                   
+        await self.bot.say(embed=embed)    
+        
+    @commands.command(pass_context = True)
+    async def calc(self, ctx, *args):
+        ans = 0
+        try:
+            for i in args:
+                ans += int(i)
+                await self.bot.say(ans)
+        else:
+             for i in args:
+                 ans -= int(i)
+                 await self.bot.say(ans)
+        else:
+             for i in args:
+                 ans *= int(i)
+                 await self.bot.say(ans)
+        else:
+             for i in args:
+                 ans /= int(i)
+                 await self.bot.say(ans)
+        except:
+            await self.bot.say('You can only add numbers silly
+            
+           
+           
+           
+        
+        
                           
                            
     
@@ -83,6 +111,7 @@ class Old_Misc():
              
 
 
+        
 
 
 
