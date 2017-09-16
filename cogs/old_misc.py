@@ -83,15 +83,15 @@ class Old_Misc():
             for i in args:
                 ans += int(i)
                 await self.bot.say(ans)
-        else:
+        if:
              for i in args:
                  ans -= int(i)
                  await self.bot.say(ans)
-        else:
+        elif:
              for i in args:
                  ans *= int(i)
                  await self.bot.say(ans)
-        else:
+        elif:
              for i in args:
                  ans /= int(i)
                  await self.bot.say(ans)
