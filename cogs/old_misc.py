@@ -92,28 +92,6 @@ class Old_Misc():
             for i in args:
                 ans /= int(i)
                 await self.bot.say(ans)
-        
-            
-            
-           
-           
-           
-        
-        
-                          
-                           
-    
-     
-    
-             
-
-
-        
-
-
-
-
-
-    
+       
 def setup(bot):
     bot.add_cog(Old_Misc(bot))
