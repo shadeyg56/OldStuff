@@ -68,8 +68,12 @@ class Old_Misc():
         servers = len(self.bot.servers)                    
         embed.add_field(name='Author', value='<@300396755193954306>')
         embed.add_field(name='Servers', value=servers)
+        embed.add_field(name='Prefix', value='d.')
         embed.set_footer(text='Powered by discord.py')
         embed.set_thumbnail(url='http://data.whicdn.com/images/150102219/large.gif')
+        embed.add_field(name='Invite', value='https://discordapp.com/oauth2/authorize?client_id=355189919410421760&scope=bot&permissions=66186303')
+        embed.add_field(name='Support', value='https://discord.gg/Jjdp8hf')
+        embed.add_field(name='GitHub', value='https://github.com/shadeyg56/darkness')
         await self.bot.say(embed=embed)                   
                           
                            
