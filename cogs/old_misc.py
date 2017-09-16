@@ -81,9 +81,9 @@ class Old_Misc():
         ans = 0
         try:
             if Type.lower() == 'add':
-            for i in args:
-                ans += int(i)
-                await self.bot.say(ans)
+                for i in args:
+                  ans += int(i)
+                  await self.bot.say(ans)
         except:
             await self.bot.say('You can only use numbers silly')
        
