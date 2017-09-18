@@ -66,11 +66,14 @@ class Mod():
                 
     @commands.command(pass_context = True)
     async def purge(self,ctx, msgs: int):
+        text = 'Deleted {} messages'
         if ctx.message.author.server_permissions.manage_messages:
-            if msgs > 10000:
-                async for message in self.bot.logs_from(ctx.message.channel, limit=msgs):
-                    await self.bot.delete_messages(message)
-                    await self.bot.say('Deleted {} messages'.format(message))
+            async for message in self.bot.logs_from(ctx.message.channel, limit=msgs):
+                await self.bot.delete_message(ctx.message)
+                await self.bot.delete_message(message)
+                await self.bot.say(text.format(message))
+                await asyncio.sleep(7)
+                await self.bot.delete_message(text)
   
         
                      
