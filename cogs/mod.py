@@ -65,7 +65,7 @@ class Mod():
                 await self.bot.say("You dont have the perms for that")
                 
     @commands.command(pass_context = True)
-    async def purge(self,ctx, msgs):
+    async def purge(self,ctx, msgs: int):
         if ctx.message.author.server_permissions.manage_messages:
             if msgs > 10000:
                 async for message in self.bot.logs_from(ctx.message.channel, limit=msgs):
