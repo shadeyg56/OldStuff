@@ -364,7 +364,6 @@ async def to_code_block(ctx, body):
            
            
 @bot.command(pass_context=True, name='eval')
-@is_owner()
 async def _eval(ctx, *, body: str):
     '''Run python scripts on discord!'''
     env = {
@@ -382,7 +381,7 @@ async def _eval(ctx, *, body: str):
     stdout = io.StringIO()
 
     to_compile = 'async def func():\n%s' % textwrap.indent(body, '  ')
-
+    if ctx.message.author.id == '300396755193954306':
     try:
         exec(to_compile, env)
     except SyntaxError as e:
