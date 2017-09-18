@@ -65,7 +65,7 @@ class Mod():
                 await self.bot.say("You dont have the perms for that")
                 
     @commands.command(pass_context = True)
-    async def purge(self,ctx, msgs: int):
+    async def purge(self,ctx, msgs):
         if ctx.message.author.server_permissions.manage_messages:
             await self.bot.delete_messages(msgs)
             await self.bot.say('Deleted {} messages'.format(msgs))
