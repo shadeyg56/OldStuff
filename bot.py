@@ -364,6 +364,7 @@ async def to_code_block(ctx, body):
            
            
 @bot.command(pass_context=True, name='eval')
+@is_owner()
 async def _eval(ctx, *, body: str):
     '''Run python scripts on discord!'''
     env = {
