@@ -81,7 +81,7 @@ async def on_ready():
     while 1 == 1:
         await bot.change_presence(game=discord.Game(name='with {} servers'.format(server)))
         await asyncio.sleep(10)
-        await bot.change_presence(game=discord.Game(name='with {} users'.format(users))
+        await bot.change_presence(game=discord.Game(name='with {} users'.format(users)))
         await asyncio.sleep(10)                         
         await bot.change_presence(game=discord.Game(name='PREFIX = d.'))
         await asyncio.sleep(10)
