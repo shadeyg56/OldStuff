@@ -66,7 +66,7 @@ class Mod():
                 
     @commands.command(pass_context = True)
     async def purge(self,ctx, msgs: int):
-        if ctx.message.author.server_permission.manage_messages:
+        if ctx.message.author.server_permissions.manage_messages:
             await self.bot.delete_messages(msgs)
             await self.bot.say('Deleted {} messages'.format(msgs))
         else:
