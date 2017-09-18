@@ -71,8 +71,7 @@ class Mod():
                 async for message in self.bot.logs_from(ctx.message.channel, limit=msgs):
                     await self.bot.delete_messages(message)
                     await self.bot.say('Deleted {} messages'.format(message))
-            else:
-                 await self.bot.say('Sorry, I cant do that')
+  
         
                      
                 
