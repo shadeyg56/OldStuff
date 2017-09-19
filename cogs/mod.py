@@ -72,9 +72,9 @@ class Mod():
         if ctx.message.author.server_permissions.manage_messages:
             await self.bot.delete_message(ctx.message)
             await self.bot.purge_from(channel, limit=msgs)
-            await self.bot.say(text.format(msgs))
+            x = await self.bot.say(text.format(msgs))
             await asyncio.sleep(7)
-            await self.bot.delete_message(text)
+            await self.bot.delete_message(x)
   
         
                      
