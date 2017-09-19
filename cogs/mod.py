@@ -43,7 +43,9 @@ class Mod():
                 await self.bot.kick(member)
                 await self.bot.say('{} was kicked'.format(member))
             except discord.Forbidden:
-                await self.bot.say("You dont have the perms for that")
+                await self.bot.say("I need **Kick Members** for this")
+            else:
+                 await self.bot.say('You need **Kick Members for this')
                 
     @commands.command(pass_context = True)
     async def ban(self, ctx, member: discord.Member):       
@@ -52,7 +54,9 @@ class Mod():
                 await self.bot.ban(member)
                 await self.bot.say('{} was banned'.format(member))
             except discord.Forbidden:
-                await self.bot.say("You dont have the perms for that")
+                await self.bot.say("I need **Ban Members** for this")
+            else:
+                 await self.bot.say('You need **Ban Members** for this')
                
     @commands.command(pass_context = True)
     async def unban(self, ctx, member: str): 
@@ -63,18 +67,26 @@ class Mod():
                 await self.bot.unban(server, mem)
                 await self.bot.say('{} was unbanned'.format(member))
             except discord.Forbidden:
-                await self.bot.say("You dont have the perms for that")
+                await self.bot.say("I need **Ban Members** for this")
+            else:
+                 await self.bot.say('You need **Ban Members** for this')
                 
     @commands.command(pass_context = True)
     async def purge(self,ctx, msgs: int):
         text = 'Deleted {} messages'
         channel = ctx.message.channel
         if ctx.message.author.server_permissions.manage_messages:
-            await self.bot.delete_message(ctx.message)
-            await self.bot.purge_from(channel, limit=msgs)
-            x = await self.bot.say(text.format(msgs))
-            await asyncio.sleep(7)
-            await self.bot.delete_message(x)
+            try:
+                await self.bot.delete_message(ctx.message)
+                await self.bot.purge_from(channel, limit=msgs)
+                x = await self.bot.say(text.format(msgs))
+                await asyncio.sleep(7)
+                await self.bot.delete_message(x)
+            except discord.Forbidden:
+                await self.bot.say('I need **Manage Messages** for this')
+            else:
+                 await self.bot.say('You need **Manage Messages** for this')
+                
   
         
                      
