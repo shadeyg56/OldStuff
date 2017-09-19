@@ -2,6 +2,7 @@ import discord
 from ext.commands import Bot
 from ext import commands
 from .utils import launcher
+import asyncio
 
 class Mod():
 
@@ -70,7 +71,7 @@ class Mod():
         channel = ctx.message.channel
         if ctx.message.author.server_permissions.manage_messages:
             await self.bot.delete_message(ctx.message)
-            await self.bot.purge_from(channel, limit=100)
+            await self.bot.purge_from(channel)
             await self.bot.say(text)
             await asyncio.sleep(7)
             await self.bot.delete_message(text)
