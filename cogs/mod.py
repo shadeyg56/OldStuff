@@ -59,13 +59,13 @@ class Mod():
                  await self.bot.say('You need **Ban Members** for this')
                
     @commands.command(pass_context = True)
-    async def unban(self, ctx, member: str, *): 
+    async def unban(self, ctx, member: str): 
         server = ctx.message.server
         mem = discord.Object(id=member)
         if ctx.message.author.server_permissions.ban_members:
             try:
                 await self.bot.unban(server, mem)
-                await self.bot.say('{} was unbanned'.format(member))
+                await self.bot.say('{} was unbanned'.format(mem))
             except discord.Forbidden:
                 await self.bot.say("I need **Ban Members** for this")
             else:
