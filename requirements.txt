@@ -2,4 +2,4 @@ discord.py
 requests
 PythonGists
 bs4
-pykemon
+pykemon2.0
