@@ -91,7 +91,7 @@ class Old_Misc():
             
     @commands.command(pass_context = True)
     async def pokemon(self, ctx):
-        test = poke.get_pokemon(uid=1)
+        test = pykemon.get(pokemon_id=1))
         await self.bot.say('test')
        
 def setup(bot):
