@@ -7,7 +7,7 @@ import random
 import asyncio
 import json
 from .utils import launcher
-import pykemon2.0
+import pykemon
 
 
 class Old_Misc():
