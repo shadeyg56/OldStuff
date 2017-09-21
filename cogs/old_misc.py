@@ -86,6 +86,11 @@ class Old_Misc():
                   await self.bot.say(ans)
         except:
             await self.bot.say('You can only use numbers silly')
+            
+    @commands.command(pass_context = True)
+    async def pokemon(self, ctx):
+        test = poke.get_pokemon(uid=1)
+        await self.bot.say('test')
        
 def setup(bot):
     bot.add_cog(Old_Misc(bot))
