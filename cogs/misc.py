@@ -3,11 +3,14 @@ from ext.commands import Bot
 from discord.ext import commands
 import datetime
 import time
+import pykemon
 
 class Misc():
     
   def __init__(self, bot):
       self.bot = bot
+        
+  poke = pykemon.V1Client()
         
   async def send_cmd_help(self,ctx):
       if ctx.invoked_subcommand:
@@ -36,6 +39,14 @@ class Misc():
       '''Say something as the bot'''
       await self.bot.say(message)
       await self.bot.delete_message(ctx.message)
+    
+  @commands.command(pass_context = True)
+  async def pokemon(self, ctx):
+      test = poke.get_pokemon(uid=1)
+      self.bot.say('test')
+      
+        
+        
 
 def setup(bot):
     bot.add_cog(Misc(bot))
