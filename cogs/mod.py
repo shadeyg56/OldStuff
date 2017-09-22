@@ -87,6 +87,16 @@ class Mod():
             else:
                  await self.bot.say('You need **Manage Messages** for this')
                 
+     @commands.command(pass_context = True)
+     async def softban(self, ctx, member: discord.Member):
+         server = ctx.message.server
+         if ctx.message.author.server_permissions.kick_members:
+            try:
+                await self.bot.ban(member)
+                await self.bot.unban(server, member)
+                await self.bot.say('{} was softbanned'.format(member))
+            except discord.Forbidden:
+                await self.bot.say('I need **Ban Members** for this')
   
         
                      
