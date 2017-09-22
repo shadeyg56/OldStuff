@@ -7,7 +7,6 @@ import random
 import asyncio
 import json
 from .utils import launcher
-import pykemon
 
 
 class Old_Misc():
@@ -90,9 +89,20 @@ class Old_Misc():
             await self.bot.say('You can only use numbers silly')
             
     @commands.command(pass_context = True)
-    async def pokemon(self, ctx):
-        test = pykemon.get(pokemon_id=1)
-        await self.bot.say('test')
+    async def remind(self, ctx, time: int, task: str, DM=None):
+        user = ctx.message.author
+        if DM == None:
+            time2 = time / 60
+            await self.bot.say('Ill remind you to {} in {} minutes'.format(task, time2))
+            await asyncio.sleep(time2)
+            await self.bot.say('{0.mention} make sure you {}'.format(user, task))
+        elif DM == 'true':
+             time2 = time / 60
+             await self.bot.say('Ill remind you in DM to {} in {} minutes'.format(task, time2))
+             await asyncio.sleep(time2)
+             await self.bot.send_message(user, 'Make sure you {}'.format(task))
+            
+    
        
 def setup(bot):
     bot.add_cog(Old_Misc(bot))
