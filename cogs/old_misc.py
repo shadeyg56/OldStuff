@@ -94,7 +94,7 @@ class Old_Misc():
             time2 = time / 60
             await self.bot.say('Ill remind you to {} in {} minutes'.format(task, time2))
             await asyncio.sleep(time2)
-            await self.bot.say('{0.mention} make sure you {}'.format(user, task))
+            await self.bot.say('{0.mention} make sure you {1}'.format(user, task))
         elif DM == 'true':
              time2 = time / 60
              await self.bot.say('Ill remind you in DM to {} in {} minutes'.format(task, time2))
