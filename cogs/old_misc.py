@@ -15,7 +15,6 @@ class Old_Misc():
     def __init__(self, bot):
         self.bot = bot
         
-    poke = pykemon.V1Client()
         
     async def send_cmd_help(self,ctx):
         if ctx.invoked_subcommand:
