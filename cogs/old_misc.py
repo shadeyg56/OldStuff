@@ -77,15 +77,25 @@ class Old_Misc():
         await self.bot.say(embed=embed)    
         
     @commands.command(pass_context = True)
-    async def calc(self,Type=None,*args):
-        ans = 0
-        try:
-            if Type.lower() == 'add':
-                for i in args:
-                  ans += int(i)
-                  await self.bot.say(ans)
-        except:
-            await self.bot.say('You can only use numbers silly')
+    async def calc(self,Type=None,ctx, num: float, num2: float):
+        if Type == 'add':
+            add = num + num2
+            await self.bot.say(add)
+        if Type == 'subtract':
+            dif = num - num2
+            await self.bot.say(dif)
+        if Type == 'multiply':
+            product = num * num2
+            await self.bot.say(product)
+        if Type == 'division':
+            div = num / num2
+            await self.bot.say(div)
+        if Type == 'exponents':
+            expo = num ** num2
+            await self.bot.say(expo)
+            
+            
+        
             
     @commands.command(pass_context = True)
     async def remind(self, ctx, time: int, task: str, DM=None):
