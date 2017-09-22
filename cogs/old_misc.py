@@ -77,7 +77,7 @@ class Old_Misc():
         await self.bot.say(embed=embed)    
         
     @commands.command(pass_context = True)
-    async def calc(self,Type=None,ctx, num: float, num2: float):
+    async def calc(self,ctx,Type=None, num: float, num2: float):
         if Type == 'add':
             add = num + num2
             await self.bot.say(add)
@@ -93,6 +93,8 @@ class Old_Misc():
         if Type == 'exponents':
             expo = num ** num2
             await self.bot.say(expo)
+        if Type == None:
+            await self.bot.say('Please specify a type (add, subtract, multiply, divide, exponents')
             
             
         
