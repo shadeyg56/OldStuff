@@ -112,7 +112,7 @@ class Old_Misc():
         channel = self.bot.get_channel('360910860090343424')
         timestamp = ctx.message.timestamp
         author = ctx.message.author
-        avatar = author.avatar.url
+        avatar = author.avatar_url
         await self.bot.say('What is your server name?')
         name = await self.bot.wait_for_message(timeout=30.0, author=author)
         await self.bot.say('How many humans are in your server?')
@@ -127,7 +127,7 @@ class Old_Misc():
         embed.add_field(name='Humans', value=humans)
         embed.add_field(name='Server Description', value=desc)
         embed.add_field(name='Invite', value=inv)
-        embed.set_author(name=author)
+        embed.set_author(name=author, icon_url=avatar)
         embed.set_footer(text='Submitted at')
         
         
