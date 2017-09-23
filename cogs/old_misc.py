@@ -127,7 +127,7 @@ class Old_Misc():
             await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
             embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
             embed.add_field(name='Server Name', value=name.content)
-            embed.add_field(name='Humans', value=humans.content
+            embed.add_field(name='Humans', value=humans.content)
             embed.add_field(name='Server Description', value=desc.content)
             embed.add_field(name='Invite', value=inv.content)
             embed.set_author(name=author, icon_url=avatar)
