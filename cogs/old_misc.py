@@ -129,7 +129,7 @@ class Old_Misc():
         embed.add_field(name='Invite', value=inv)
         embed.set_author(name=author, icon_url=avatar)
         embed.set_footer(text='Submitted at')
-        await self.bot.send_messsage(channel, embed=embed)
+        await self.bot.send_message(channel, embed=embed)
         
         
        
