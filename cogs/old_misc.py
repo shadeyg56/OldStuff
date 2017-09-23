@@ -134,7 +134,13 @@ class Old_Misc():
             embed.set_footer(text='Submitted at')
             await self.bot.send_message(channel, embed=embed)
         elif name == None:
-             await self.bot.say('Sorry, you took too long')
+              await self.bot.say('Sorry, you took too long')
+        elif humans == None:
+              await self.bot.say('Sorry, you took too long')
+        elif desc == None:
+              await self.bot.say('Sorry, you took too long')
+        elif inv == None:
+              await self.bot.say('Sorry, you took too long')
         else:
             await self.bot.say('This command can only be ran in the Dragons and Kats server\n. If you arent in this server, you can join with this invite link: https://discord.gg/uEC84cR')
         
