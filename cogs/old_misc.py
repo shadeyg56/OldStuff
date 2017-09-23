@@ -107,6 +107,11 @@ class Old_Misc():
         await asyncio.sleep(time2)
         await self.bot.say('{0.mention} make sure you {1}'.format(user, task))
         
+    @commands.command(pass_context = True)
+    async def partner(self, ctx, *, info: str):
+        channel = await self.bot.get_channel('360910860090343424')
+        await self.bot.send_message(channel, '<@&342127771751022604>')
+        
             
     
        
