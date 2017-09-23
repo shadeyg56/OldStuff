@@ -127,7 +127,7 @@ class Old_Misc():
         embed.add_field(name='Humans', value=humans)
         embed.add_field(name='Server Description', value=desc)
         embed.add_field(name='Invite', value=inv)
-        embed.set_author(name=author, icon_url=avatar)
+        embed.set_author(name=author)
         embed.set_footer(text='Submitted at')
         
         
