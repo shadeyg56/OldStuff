@@ -108,8 +108,8 @@ class Old_Misc():
         await self.bot.say('{0.mention} make sure you {1}'.format(user, task))
         
     @commands.command(pass_context = True)
-    async def partner(self, ctx, *, info: str):
-        channel = await self.bot.get_channel('360910860090343424')
+    async def partner(self, ctx):
+        channel = self.bot.get_channel('360910860090343424')
         author = ctx.message.author
         await self.bot.say('What is your server name?')
         name = await self.bot.wait_for_message(timeout=30.0, author=author)
