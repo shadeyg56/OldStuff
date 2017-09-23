@@ -110,6 +110,7 @@ class Old_Misc():
     @commands.command(pass_context = True)
     async def partner(self, ctx):
         channel = self.bot.get_channel('360910860090343424')
+        channel2 = ctx.message.channel
         timestamp = ctx.message.timestamp
         author = ctx.message.author
         avatar = author.avatar_url
@@ -122,7 +123,7 @@ class Old_Misc():
             desc = await self.bot.wait_for_message(timeout=30.0, author=author)
             await self.bot.say('Finally please provide a invite link')
             inv = await self.bot.wait_for_message(timeout=30.0, author=author)
-            await self.bot.purge_from(limit=8)
+            await self.bot.purge_from(channel2, limit=8)
             await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
             embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
             embed.add_field(name='Server Name', value=name.content)
@@ -132,6 +133,8 @@ class Old_Misc():
             embed.set_author(name=author, icon_url=avatar)
             embed.set_footer(text='Submitted at')
             await self.bot.send_message(channel, embed=embed)
+        elif name == None:
+             await self.bot.say('Sorry, you took too long')
         else:
             await self.bot.say('This command can only be ran in the Dragons and Kats server\n. If you arent in this server, you can join with this invite link: https://discord.gg/uEC84cR')
         
