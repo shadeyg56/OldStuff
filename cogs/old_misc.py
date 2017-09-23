@@ -113,23 +113,27 @@ class Old_Misc():
         timestamp = ctx.message.timestamp
         author = ctx.message.author
         avatar = author.avatar_url
-        await self.bot.say('What is your server name?')
-        name = await self.bot.wait_for_message(timeout=30.0, author=author)
-        await self.bot.say('How many humans are in your server?')
-        humans = await self.bot.wait_for_message(timeout=30.0, author=author)
-        await self.bot.say('Please provide a detailed description of your server.')
-        desc = await self.bot.wait_for_message(timeout=30.0, author=author)
-        await self.bot.say('Finally please provide a invite link')
-        inv = await self.bot.wait_for_message(timeout=30.0, author=author)
-        await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
-        embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
-        embed.add_field(name='Server Name', value=name.content)
-        embed.add_field(name='Humans', value=humans)
-        embed.add_field(name='Server Description', value=desc)
-        embed.add_field(name='Invite', value=inv)
-        embed.set_author(name=author, icon_url=avatar)
-        embed.set_footer(text='Submitted at')
-        await self.bot.send_message(channel, embed=embed)
+        if ctx.message.server.id == '294262760752152576':
+            await self.bot.say('What is your server name?')
+            name = await self.bot.wait_for_message(timeout=30.0, author=author)
+            await self.bot.say('How many humans are in your server?')
+            humans = await self.bot.wait_for_message(timeout=30.0, author=author)
+            await self.bot.say('Please provide a detailed description of your server.')
+            desc = await self.bot.wait_for_message(timeout=30.0, author=author)
+            await self.bot.say('Finally please provide a invite link')
+            inv = await self.bot.wait_for_message(timeout=30.0, author=author)
+            await self.bot.purge_from(limit=8)
+            await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
+            embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
+            embed.add_field(name='Server Name', value=name.content)
+            embed.add_field(name='Humans', value=humans)
+            embed.add_field(name='Server Description', value=desc)
+            embed.add_field(name='Invite', value=inv)
+            embed.set_author(name=author, icon_url=avatar)
+            embed.set_footer(text='Submitted at')
+            await self.bot.send_message(channel, embed=embed)
+        else:
+            await self.bot.say('This command can only be ran in the Dragons and Kats server\n. If you arent in this server, you can join with this invite link: https://discord.gg/uEC84cR')
         
         
        
