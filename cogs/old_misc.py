@@ -109,10 +109,10 @@ class Old_Misc():
         
     @commands.command(pass_context = True)
     async def partner(self, ctx, *, info: str):
-        def is_me(msg):
-          channel = await self.bot.get_channel('360910860090343424')  
+        channel = await self.bot.get_channel('360910860090343424')
+        author = ctx.message.author
         await self.bot.say('What is your server name?')
-        name = await self.bot.wait_for_message(timeout=30.0, check=is_me)
+        name = await self.bot.wait_for_message(timeout=30.0, author=author)
         
         
        
