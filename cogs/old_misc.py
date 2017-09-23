@@ -77,7 +77,7 @@ class Old_Misc():
         await self.bot.say(embed=embed)    
         
     @commands.command(pass_context = True)
-    async def calc(self,ctx,Type=None, num: float, num2: float):
+    async def calc(self,ctx,num: float, num2: float, Type=None):
         if Type == 'add':
             add = num + num2
             await self.bot.say(add)
