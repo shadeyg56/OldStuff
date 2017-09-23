@@ -110,10 +110,25 @@ class Old_Misc():
     @commands.command(pass_context = True)
     async def partner(self, ctx):
         channel = self.bot.get_channel('360910860090343424')
+        timestamp = ctx.message.timestamp
         author = ctx.message.author
+        avatar = author.avatar.url
         await self.bot.say('What is your server name?')
         name = await self.bot.wait_for_message(timeout=30.0, author=author)
-        await self.bot.say(name)
+        await self.bot.say('How many humans are in your server?')
+        humans = await self.bot.wait_for_message(timeout=30.0, author=author)
+        await self.bot.say('Please provide a detailed description of your server.')
+        desc = await self.bot.wait_for_message(timeout=30.0, author=author)
+        await self.bot.say('Finally please provide a invite link')
+        inv = await self.bot.wait_for_message(timeout=30.0, author=author)
+        await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
+        embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
+        embed.add_field(name='Server Name', value=name)
+        embed.add_field(name='Humans', value=humans)
+        embed.add_field(name='Server Description', value=desc)
+        embed.add_field(name='Invite', value=inv)
+        embed.set_author(name=author, icon_url=avatar)
+        embed.set_footer(text='Submitted at')
         
         
        
