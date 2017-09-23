@@ -113,6 +113,7 @@ class Old_Misc():
         author = ctx.message.author
         await self.bot.say('What is your server name?')
         name = await self.bot.wait_for_message(timeout=30.0, author=author)
+        await self.bot.say(name)
         
         
        
