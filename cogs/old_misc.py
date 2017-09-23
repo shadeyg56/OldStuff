@@ -100,14 +100,14 @@ class Old_Misc():
         
             
     @commands.command(pass_context = True)
-    async def remind(self, ctx, time: int,*, task: str, DM=None):
+    async def remind(self, ctx, DM=None, time: int,*, task: str):
         user = ctx.message.author
         if DM == None:
             time2 = time * 60
             await self.bot.say('Ill remind you to {} in {} minutes'.format(task, time))
             await asyncio.sleep(time2)
             await self.bot.say('{0.mention} make sure you {1}'.format(user, task))
-        elif DM == 'true':
+        elif DM == 'DM':
              time2 = time * 60
              await self.bot.say('Ill remind you in DM to {} in {} minutes'.format(task, time))
              await asyncio.sleep(time2)
