@@ -123,7 +123,7 @@ class Old_Misc():
         inv = await self.bot.wait_for_message(timeout=30.0, author=author)
         await self.bot.say('Your submission has been entered. Please dont bug the inspectors, they will check your server when they have time')
         embed = discord.Embed(title='New Submission', color=0xed, timestamp=timestamp)
-        embed.add_field(name='Server Name', value=name.message.content)
+        embed.add_field(name='Server Name', value=name.content)
         embed.add_field(name='Humans', value=humans)
         embed.add_field(name='Server Description', value=desc)
         embed.add_field(name='Invite', value=inv)
